@@ -33,13 +33,14 @@ export default function Cart(){
                   <div className="self-stretch pd-h2 tracking-tighter text-pd-black">Cart</div>
                 </div>
                 <div className="self-start mt-2 text-2xl font-extrabold leading-6 text-pd-mid-gray">
-                  1 Item
+                  {cartItems.length} Item{cartItems.length==1?'':'s'}
                 </div>
               </div>
               <div className="mt-1">
                 <div className="flex gap-0 md:gap-5 flex-col md:flex-col">
                   {/* multi and single */}
-                  <div className="h-[600px] overflow-scroll">
+                  {/* h-[600px] overflow-scroll */}
+                  <div className="">
                   {cartItems.length < 1 ? (
                     <p className="text-pd-red pd-p-18">Your cart is empty</p>
                   ) : (
@@ -47,14 +48,14 @@ export default function Cart(){
                       <div className="flex flex-wrap">
                         <div className="flex flex-col w-full md:w-[57%]">
                           <div className="flex flex-col justify-center items-center px-6 py-4 w-full rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
-                            <img loading="lazy" src={"images/Image.png"} className="w-full aspect-[1.05]"/>
+                            <img loading="lazy" src={"images/products/"+cartItems[0].id+".png"} className="w-full aspect-[1.05]"/>
                           </div>
                         </div>
                         <div className="pl-5 w-full md:w-[43%]">
                           <div className="flex flex-col">
                             <div className="flex gap-2.5 mt-10 text-2xl font-extrabold text-pd-black">
-                              <h3 className="leading-8 pd-h3">Iphone 14 Plus</h3>
-                              <h3 className="flex-1 my-auto pd-h3 text-right leading-[130%]">$225.00</h3>
+                              <h3 className="leading-8 pd-h3">{cartItems[0].title}</h3>
+                              <h3 className="flex-1 my-auto pd-h3 text-right leading-[130%]">${cartItems[0].price}</h3>
                             </div>
                             <div className="flex gap-2 mt-2 whitespace-nowrap pd-p font-semibold">
                               <span className="text-pd-mid-gray">Color</span>
@@ -62,9 +63,9 @@ export default function Cart(){
                             </div>
                             <div className="flex gap-8 mt-6 w-full whitespace-nowrap">
                               <div className="flex gap-10 justify-center items-center px-4 py-3 border border-black border-solid rounded-[52px] text-pd-black">
-                                <button><Minus /></button>
-                                <span className="self-start">{1}</span>
-                                <button><Plus /></button>
+                                <button onClick={() => changeQuantity(cartItems[0], -1)} disabled={item.quantity === 1}><Minus /></button>
+                                <span className="self-start">{cartItems[0].quantity}</span>
+                                <button onClick={() => changeQuantity(cartItems[0], 1)}><Plus /></button>
                               </div>
                               <div className="my-auto">
                                 <button className="text-pd-red pd-p font-semibold">Remove</button>
@@ -74,12 +75,42 @@ export default function Cart(){
                         </div>
                       </div> 
                     ):(
-
+                      cartItems.map(item => (
+                        <div key={item.id} className="flex justify-between items-center">
+                          <div className="flex flex-col w-[150px]">
+                            <div className="flex flex-col justify-center items-center px-6 py-4 w-full rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
+                              <img loading="lazy" src={"images/products/n"+item.id+".png"} className="w-full aspect-[1.05]"/>
+                            </div>
+                          </div>
+                          <div className="pl-5 w-[43%]">
+                            <div className="flex flex-col">
+                              <div className="flex gap-2.5 mt-10 text-2xl font-extrabold text-pd-black">
+                                <h3 className="leading-8 pd-h3">{item.title}</h3>
+                                <h3 className="flex-1 my-auto pd-h3 text-right leading-[130%]">${item.price}</h3>
+                              </div>
+                              <div className="flex gap-2 mt-2 whitespace-nowrap pd-p font-semibold">
+                                <span className="text-pd-mid-gray">Color</span>
+                                <span className="text-pd-black">Silver</span>
+                              </div>
+                              <div className="flex gap-8 mt-6 w-full whitespace-nowrap">
+                                <div className="flex gap-10 justify-center items-center px-4 py-3 border border-black border-solid rounded-[52px] text-pd-black">
+                                  <button onClick={() => changeQuantity(item, -1)} disabled={item.quantity === 1}><Minus /></button>
+                                  <span className="self-start">{cartItems[0].quantity}</span>
+                                  <button onClick={() => changeQuantity(item, 1)}><Plus /></button>
+                                </div>
+                                <div className="my-auto">
+                                  <button className="text-pd-red pd-p font-semibold">Remove</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))
                     )
                   )}
                     
                     {/* multi items no break */}
-                    <div className="flex justify-between items-center">
+                    {/* <div className="flex justify-between items-center">
                       <div className="flex flex-col w-[150px]">
                         <div className="flex flex-col justify-center items-center px-6 py-4 w-full rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
                           <img loading="lazy" src="images/Image.png" className="w-full aspect-[1.05]"/>
@@ -165,7 +196,7 @@ export default function Cart(){
                           </div>
                         </div>
                       </div>
-                    </div> 
+                    </div>  */}
 
 
                   </div>     
