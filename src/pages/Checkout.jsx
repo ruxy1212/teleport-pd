@@ -1,17 +1,35 @@
+import { useState } from 'react';
 import WebLayout from "../layouts/WebLayout";
 import { Link } from "react-router-dom";
 import ChevronRight from "../components/icons/ChevronRight";
 import Plus from "../components/icons/Plus"
-import Minus from "../components/icons/Minus"
-import Percent from "../components/icons/Percent"
+// import Minus from "../components/icons/Minus"
+// import Percent from "../components/icons/Percent"
 import Trailing from "../components/icons/Trailing";
 import amex from "../assets/img/icons/amex.svg";
 import discover from "../assets/img/icons/discover.svg";
+import Modal from "../components/Modal";
+import AddPayment from "../components/parts/AddPayment";
+import ShowSuccess from "../components/parts/ShowSuccess";
 
 export default function Checkout(){
+    const [showPayment, setShowPayment] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(true);
+
+    const setOpen = () => {
+      setShowPayment(false);
+      setShowSuccess(false);
+    }
+
     return (
         <WebLayout>
-<div className="max-w-[1200px] mx-auto mt-6 px-4 md:px-6 xl:px-0">
+          <Modal open={showPayment} setOpen={setOpen}>
+            <AddPayment></AddPayment>
+          </Modal>
+          <Modal open={showSuccess} setOpen={setOpen}>
+            <ShowSuccess></ShowSuccess>
+          </Modal>
+        <div className="max-w-[1200px] mx-auto mt-6 px-4 md:px-6 xl:px-0">
           <div className="flex gap-5 flex-col md:flex-row">
             <div className="flex flex-col grow w-full md:w-[67%] gap-8">
               <div>
@@ -62,7 +80,7 @@ export default function Checkout(){
 
               <div className="shrink-0 mt-8 h-px bg-black border border-black border-solid max-md:max-w-full" />
 
-              <button className="flex gap-4 justify-center self-start mt-8 font-semibold leading-6 rounded font-montserrat">
+              <button className="flex gap-4 justify-center self-start mt-8 font-semibold leading-6 rounded font-montserrat" onClick={()=>setShowPayment(true)}>
                 <Plus />
                 <span>Add Payment method</span>
               </button>
@@ -105,7 +123,7 @@ export default function Checkout(){
                 </div>
               </div>
               <div className="mt-6">
-                <button className="mx-auto py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Place Your Order and Pay</button>
+                <button onClick={()=>setShowSuccess(true)} className="mx-auto py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Place Your Order and Pay</button>
               </div>
             </div>
           </div>
