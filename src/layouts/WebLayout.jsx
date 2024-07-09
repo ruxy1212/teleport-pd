@@ -3,6 +3,8 @@ import Logo from '../components/icons/Logo';
 import ArrowRight from '../components/icons/ArrowRight';
 import Email from '../components/icons/Email';
 import Phone from '../components/icons/Phone';
+import Close from '../assets/img/icons/Close.svg';
+import Menu from '../assets/img/icons/Menu.svg';
 
 export default function WebLayout({children}){
     return (
@@ -18,9 +20,15 @@ export default function WebLayout({children}){
                     <li className="uppercase p-4 font-semibold"><a href="#">Company</a></li>
                     <a className="p-4 uppercase font-semibold" href="#">Login</a>
                 </ul> */}
-                <div className="flex items-center gap-2 py-2">
-                    <a className="flex w-12 h-12 rounded-full justify-center items-center border-[3px] border-pd-black" href="#"><span className="font-semibold pd-p">{1}</span></a>
+                <div className="hidden items-center gap-2 py-2 md:flex">
+                    <span className="flex w-12 h-12 rounded-full justify-center items-center border-[3px] border-pd-black font-semibold pd-p">{1}</span>
                     <button className="py-4 px-9 flex items-center gap-2 bg-pd-black text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Go To Cart<ArrowRight className="h-5 w-5"/></button>
+                </div>
+                <div className="flex items-center gap-2 py-2 md:hidden">
+                    <span className="flex w-12 h-12 justify-center items-center">
+                        <img src={Menu} alt="" />
+                    </span>
+                    {/* <button className="py-4 px-9 flex items-center gap-2 bg-pd-black text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Go To Cart<ArrowRight className="h-5 w-5"/></button> */}
                 </div>
             </nav>
                 {children}

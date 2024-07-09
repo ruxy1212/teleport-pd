@@ -56,7 +56,7 @@ export default function Home() {
                         </div>
                         <div className="relative flex flex-col ml-5 w-[34%] max-md:ml-0 max-md:w-full">
                             <div className="">
-                                <img loading="lazy" src={abs_image} className="z-10 absolute bottom-16 right-16 shrink-0 aspect-[1.22] w-[189px]"/>
+                                <img loading="lazy" src={abs_image} className="z-10 absolute bottom-16 right-16 md:-left-20 lg:-left-28 shrink-0 aspect-[1.22] w-[189px]"/>
                             </div>
                             <img loading="lazy" src={hero} className="grow w-full max-w-[350px] aspect-[0.61] mx-auto md:mx-0"/>
                         </div>
@@ -71,7 +71,7 @@ export default function Home() {
                     <div className="flex justify-between items-center mt-12 leading-6 text-center text-pd-black flex-wrap">
                         {
                             p_categories.map(category => (
-                                <div key={category[1]} className="flex justify-center py-px leading-6 w-1/3 md:w-[1/7]">
+                                <div key={category[1]} className="flex justify-center py-px leading-6 w-1/3 md:w-[14.28%]">
                                     <div className="flex flex-col max-w-28">
                                         <img loading="lazy" src={category[0]} className="self-center aspect-square w-[85px]" />
                                         <div className="mt-4">{category[1]}</div>
