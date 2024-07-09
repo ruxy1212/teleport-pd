@@ -43,7 +43,7 @@ export default function Checkout(){
               <div className="flex flex-col justify-between py-2 mt-6 rounded border border-black border-solid max-md:max-w-full">
 {/* starts here */}
                 <div className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full p-2">
-                  <div className="flex gap-5 justify-between">
+                  <div className="flex gap-0 md:gap-5 justify-between flex-col md:flex-row">
                     <div className="flex gap-3.5">
                       <div className="flex flex-col justify-center p-0.5">
                         <div className="flex flex-col justify-center items-center">
@@ -61,7 +61,7 @@ export default function Checkout(){
                 <div className="shrink-0 mt-2 h-px border border-pd-black border-solid max-md:max-w-full" />
 
                 <div className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full p-2">
-                  <div className="flex gap-5 justify-between">
+                  <div className="flex gap-0 md:gap-5 justify-between flex-col md:flex-row">
                     <div className="flex gap-3.5">
                       <div className="flex flex-col justify-center p-0.5">
                         <div className="flex flex-col justify-center items-center">
