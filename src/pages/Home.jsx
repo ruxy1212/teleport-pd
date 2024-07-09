@@ -14,6 +14,7 @@ import ProdNavRight from "../components/icons/ProdNavRight"
 import ProdFavorite from "../components/icons/ProdFavorite"
 import Cart from "../components/icons/Cart"
 import Rating from "../components/Rating"
+import ProdSwitch from "../components/icons/ProdSwitch"
 // import callout from "../assets/img/icons/callout.svg"
 
 export default function Home() {
@@ -91,8 +92,8 @@ export default function Home() {
                                 <h2 className="pd-h2 text-pd-black">New <span className="text-pd-red">arrival</span> for you</h2>
                             </div>
                             <div className="flex gap-5 justify-between my-auto">
-                                <button><ProdNavLeft style={{fill: 'none', stroke: 'black'}} /></button>
-                                <button><ProdNavRight style={{fill: '#AFE638', stroke: 'none'}} /></button>
+                                <button><ProdSwitch style={{fill: 'none', stroke: 'black'}} /></button>
+                                <button><ProdSwitch style={{fill: '#AFE638', stroke: 'none'}} /></button>
                             </div>
                         </div>
                     </div> 
