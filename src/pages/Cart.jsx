@@ -189,7 +189,7 @@ export default function Cart(){
                 </div>
               </div>
               <div className="mt-6">
-                <button className="mx-auto py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Proceed to Checkout</button>
+                <Link to="/checkout" className="mx-auto py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Proceed to Checkout</Link>
               </div>
             </div>
           </div>
