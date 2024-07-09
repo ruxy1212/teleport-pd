@@ -7,6 +7,7 @@ import Close from '../assets/img/icons/Close.svg';
 import Menu from '../assets/img/icons/Menu.svg';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import ShoppingCart from '../components/icons/ShoppingCart';
 
 export default function WebLayout({children}){
     const [open, setOpen] = useState(false);
@@ -24,15 +25,24 @@ export default function WebLayout({children}){
                     <li className="uppercase p-4 font-semibold"><a href="#">Company</a></li>
                     <a className="p-4 uppercase font-semibold" href="#">Login</a>
                 </ul> */}
+                
                 {
                     location.pathname == '/' && 
                     <div className="hidden items-center gap-2 py-2 md:flex">
+                        <div className="relative">
+                            <span className="font-semibold pd-p absolute inset-y-auto">1</span>
+                            <ShoppingCart/>
+                        </div>
                         <span className="flex w-12 h-12 rounded-full justify-center items-center border-[3px] border-pd-black font-semibold pd-p">{1}</span>
                         <Link to="/cart" className="py-4 px-9 flex items-center gap-2 bg-pd-black text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Go To Cart<ArrowRight className="h-5 w-5"/></Link>
                     </div>
                 }
                 
                 <div className="flex items-center gap-2 py-2 md:hidden">
+                    <div className="relative">
+                        <span className="font-semibold pd-p absolute inset-y-auto">1</span>
+                        <ShoppingCart/>
+                    </div>
                     <button className="flex w-12 h-12 justify-end items-center" onClick={()=>setOpen(true)} >
                         <img src={Menu} alt="" />
                     </button>
