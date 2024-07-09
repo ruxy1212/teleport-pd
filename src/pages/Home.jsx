@@ -9,13 +9,10 @@ import camera from "../assets/img/icons/camera.svg"
 import gaming from "../assets/img/icons/gaming.svg"
 import mobile from "../assets/img/icons/mobile.svg"
 import tv from "../assets/img/icons/tv.svg"
-import ProdNavLeft from "../components/icons/ProdNavLeft"
-import ProdNavRight from "../components/icons/ProdNavRight"
 import ProdFavorite from "../components/icons/ProdFavorite"
 import Cart from "../components/icons/Cart"
 import Rating from "../components/Rating"
 import ProdSwitch from "../components/icons/ProdSwitch"
-// import callout from "../assets/img/icons/callout.svg"
 
 export default function Home() {
     const p_categories = [
@@ -29,8 +26,21 @@ export default function Home() {
     ];
 
     const new_products = [
-        {id:1, img:'Image.png', title:'Iphone 14 Plus', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:4, feedbacks:'125'},
-        {id:2, img:'Image2.png', title:'Iphone 14 Plus 2', price:'250.00', desc:'Latest smartphones with top-tier cameras, fast processors.', rating:5, feedbacks:'125'},
+        {id:1, img:'Image.png', title:'Iphone 14 Plus', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
+        {id:2, img:'Image2.png', title:'Samsung Galaxy Flip 3', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
+        {id:3, img:'Image2.png', title:'Samsung Galaxy Flip 5', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
+        {id:4, img:'Image2.png', title:'Ipad Mini 6', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
+        {id:5, img:'Image2.png', title:'Iphone 12 Pro', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
+        {id:6, img:'Image2.png', title:'Iphone XR', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
+        {id:7, img:'Image2.png', title:'Iphone 8 Plus', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
+        {id:8, img:'Image2.png', title:'Iphone 13 Series', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
+        {id:9, img:'Image2.png', title:'Samsung Galaxy Tab S8', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
+    ];
+
+    const flash_products = [
+        {id:1, img:'Image2.png', title:'Ipad Mini 6', price:'89.000', desc:'Powerful iPads with stunning displays and seamless performance', rating:5, feedbacks:'125', discount: '8'},
+        {id:2, img:'Image2.png', title:'Ipad M1 Air', price:'89.000', desc:'Powerful iPads with stunning displays and seamless performance', rating:5, feedbacks:'125', discount: '8'},
+        {id:1, img:'Image2.png', title:'Ipad Mini 10th Gen', price:'89.000', desc:'Powerful iPads with stunning displays and seamless performance', rating:5, feedbacks:'125', discount: '8'}
     ];
 
     return(
@@ -106,7 +116,7 @@ export default function Home() {
                                             <ProdFavorite/>
                                         </div>
                                         <div className="flex flex-col justify-center px-7 mt-2">
-                                            <img loading="lazy" src={"images/"+product.img} className="w-full aspect-[1.04]" />
+                                            <img loading="lazy" src={"images/products/n"+product.id+".png"} className="w-full aspect-[1.04]" />
                                         </div>
                                     </div>
                                     <div className="flex gap-5 px-5 mt-10 text-2xl font-extrabold text-pd-black">
@@ -143,16 +153,16 @@ export default function Home() {
                     </div> 
                     <div className="max-w-[1200px] mx-auto px-4 md:px-6 xl:px-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         {
-                            new_products.map(product => (
+                            flash_products.map(product => (
                                 <div key={product.id} className="flex flex-col">
                                     <div className="flex flex-col px-8 py-4 w-full rounded-2xl shadow-lg border border-pd-white backdrop-blur-sm aspect-square leading-[120%]">
                                         <div className="relative flex flex-col justify-center mt-2">
                                             <div className="flex justify-end">
-                                                <span className="flex justify-center items-center h-[60px] w-[135px] bg-[url('/images/callout.svg')] pd-p-18 font-bold relative bottom-[-23px] right-[-23px]">8% Off</span>
+                                                <span className="flex justify-center items-center h-[60px] w-[135px] bg-[url('/images/callout.svg')] pd-p-18 font-bold relative bottom-[-23px] right-[-23px]">{product.discount}% Off</span>
                                             </div>
-                                            <img loading="lazy" src={"images/"+product.img} className="w-full aspect-[1.04]" />
+                                            <img loading="lazy" src={"images/products/f"+product.id+".png"} className="w-full aspect-[1.04]" />
                                             <div className="flex gap-3 self-center mt-4">
-                                                <h3 className="text-[26px] font-montserrat font-bold text-pd-blue">$89.000</h3>
+                                                <h3 className="text-[26px] font-montserrat font-bold text-pd-blue">${product.price}</h3>
                                                 <div className="my-auto text-sm font-medium font-montserrat text-pd-mid-gray line-through">IDR 150.00</div>
                                             </div>
                                         </div>
