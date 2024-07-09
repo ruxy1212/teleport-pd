@@ -56,7 +56,7 @@ export default function Home() {
                         </div>
                         <div className="relative flex flex-col ml-5 w-[34%] max-md:ml-0 max-md:w-full">
                             <div className="">
-                                <img loading="lazy" src={abs_image} className="z-10 absolute bottom-16 -left-16 shrink-0 aspect-[1.22] w-[189px]"/>
+                                <img loading="lazy" src={abs_image} className="z-10 absolute bottom-16 right-16 shrink-0 aspect-[1.22] w-[189px]"/>
                             </div>
                             <img loading="lazy" src={hero} className="grow w-full max-w-[350px] aspect-[0.61] mx-auto md:mx-0"/>
                         </div>
@@ -68,12 +68,14 @@ export default function Home() {
                     <div>
                         <h1 className="text-pd-black pd-h1 text-left md:text-center">What <span className="text-pd-red">we</span> provide?</h1>
                     </div>
-                    <div className="flex justify-between items-center mt-12 leading-6 text-center text-pd-black">
+                    <div className="flex justify-between items-center mt-12 leading-6 text-center text-pd-black flex-wrap">
                         {
                             p_categories.map(category => (
-                                <div key={category[1]} className="flex flex-col py-px leading-6 w-1/3 lg:w-full max-w-28">
-                                    <img loading="lazy" src={category[0]} className="self-center aspect-square w-[85px]" />
-                                    <div className="mt-4">{category[1]}</div>
+                                <div key={category[1]} className="flex justify-center py-px leading-6 w-1/3 md:w-[1/7]">
+                                    <div className="flex flex-col max-w-28">
+                                        <img loading="lazy" src={category[0]} className="self-center aspect-square w-[85px]" />
+                                        <div className="mt-4">{category[1]}</div>
+                                    </div>
                                 </div>
                             ))
                         }
@@ -93,7 +95,7 @@ export default function Home() {
                             </div>
                         </div>
                     </div> 
-                    <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         {
                             new_products.map(product => (
                                 <div key={product.id} className="flex flex-col">
@@ -137,7 +139,7 @@ export default function Home() {
                             </div>
                         </div>
                     </div> 
-                    <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         {
                             new_products.map(product => (
                                 <div key={product.id} className="flex flex-col">

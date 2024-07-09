@@ -111,25 +111,45 @@
 }
 @media only screen and (min-width: 481px) and (max-width: 767px){ 
   .pd-h1{
-    font-size: 56px;
+    font-size: 52px;
   }
   .pd-h2{
-    font-size: 41px;
+    font-size: 38px;
   }
   .pd-h3{
-    font-size: 21px;
+    font-size: 20px;
   }
   .pd-p{
-    font-size: 15px;
+    font-size: 14px;
   }
   .pd-p-18{
-    font-size: 17px;
+    font-size: 16px;
   }
   .hero-badge-text{
-    font-size: 45px;
+    font-size: 41px;
   }
 }
 
+@media only screen and (max-width: 480px){ 
+  .pd-h1{
+    font-size: 48px;
+  }
+  .pd-h2{
+    font-size: 36px;
+  }
+  .pd-h3{
+    font-size: 20px;
+  }
+  .pd-p{
+    font-size: 14px;
+  }
+  .pd-p-18{
+    font-size: 16px;
+  }
+  .hero-badge-text{
+    font-size: 42px;
+  }
+}
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
