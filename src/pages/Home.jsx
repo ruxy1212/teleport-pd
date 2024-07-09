@@ -13,7 +13,6 @@ import ProdFavorite from "../components/icons/ProdFavorite"
 import Cart from "../components/icons/Cart"
 import Rating from "../components/Rating"
 import ProdSwitch from "../components/icons/ProdSwitch"
-import { useState } from 'react'
 import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function Home() {

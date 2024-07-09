@@ -81,16 +81,16 @@ export default function WebLayout({children, cartItems = null}){
                     <div className="flex flex-col gap-0 md:gap-3 w-full">
                         <h3 className="text-[22px] font-extrabold font-montserrat">Information</h3>
                         <ul>
-                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#">About Us</a></li>
-                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#">Products Digital</a></li>
-                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#">Customer Reviews</a></li>
+                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#">Help Center</a></li>
+                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#">Payment Methods</a></li>
+                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#">Return & Refund</a></li>
                         </ul>
                     </div>
                     <div className="flex flex-col gap-0 md:gap-3 w-full">
                         <h3 className="text-[22px] font-extrabold font-montserrat">Contact</h3>
                         <ul>
-                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#"><Email className="inline-block me-2"/>About Us</a></li>
-                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#"><Phone className="inline-block me-2"/>Products Digital</a></li>
+                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#"><Email className="inline-block me-2"/>(+1) 123-456-7890</a></li>
+                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#"><Phone className="inline-block me-2"/>email@youremail.com</a></li>
                         </ul>
                     </div>
                 </div>
