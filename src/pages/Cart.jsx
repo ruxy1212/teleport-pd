@@ -167,7 +167,7 @@ export default function Cart(){
               </div>
               <div className="flex gap-5 justify-between mt-6 whitespace-nowrap">
                 <p className="text-indigo-950">Shipping</p>
-                <p className="text-red-600">Free</p>
+                <p className="text-pd-red">Free</p>
               </div>
               <div className="flex gap-5 justify-between mt-6 text-indigo-950">
                 <p>Coupon Applied</p>

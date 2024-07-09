@@ -17,7 +17,8 @@ export default {
       'pd-black': '#0C0A00',
       'pd-red': '#DF1406',
       'pd-mid-gray': '#9A9A9A',
-      'pd-blue': '#0177FC'
+      'pd-blue': '#0177FC',
+      'pd-green': '#AFE638'
     },
     fontFamily: {
       prompt: ['"Prompt"'],
