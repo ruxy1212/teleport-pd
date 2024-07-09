@@ -65,6 +65,14 @@
 .hero-badge-text{
   font-size: 52px;
 }
+
+.pd-off-canvas{
+  transition: all 5s;
+}
+
+button:hover{
+  opacity: .6;
+}
 /* sm: '480px',
       md: '768px',
       lg: '976px',
@@ -132,7 +140,7 @@
 
 @media only screen and (max-width: 480px){ 
   .pd-h1{
-    font-size: 48px;
+    font-size: 42px;
   }
   .pd-h2{
     font-size: 36px;
@@ -147,7 +155,7 @@
     font-size: 16px;
   }
   .hero-badge-text{
-    font-size: 42px;
+    font-size: 38px;
   }
 }
 /* :root {
