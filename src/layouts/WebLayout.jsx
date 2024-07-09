@@ -29,26 +29,16 @@ export default function WebLayout({children}){
                 {
                     location.pathname == '/' && 
                     <div className="hidden items-center gap-2 py-2 md:flex">
-                        <div className="relative">
-                            <span className="font-semibold pd-p absolute inset-y-auto">1</span>
-                            <ShoppingCart/>
-                        </div>
-                        <span className="flex w-12 h-12 rounded-full justify-center items-center border-[3px] border-pd-black font-semibold pd-p">{1}</span>
+                        <ShoppingCart text={13}/>
                         <Link to="/cart" className="py-4 px-9 flex items-center gap-2 bg-pd-black text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Go To Cart<ArrowRight className="h-5 w-5"/></Link>
                     </div>
                 }
                 
                 <div className="flex items-center gap-2 py-2 md:hidden">
-                    <div className="relative">
-                        <span className="font-semibold pd-p absolute inset-y-auto">1</span>
-                        <ShoppingCart/>
-                    </div>
+                    <ShoppingCart text={13}/>
                     <button className="flex w-12 h-12 justify-end items-center" onClick={()=>setOpen(true)} >
                         <img src={Menu} alt="" />
                     </button>
-                    {/* <button className="py-4 px-9 flex items-center gap-2 bg-pd-black text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Go To Cart<ArrowRight className="h-5 w-5"/></button>
-                     flex
-                     */}
                 </div>
             </nav>
             <div className={`${open?'flex':'hidden'} md:hidden fixed top-0 left-0 w-screen h-screen z-40 bg-pd-black/50 justify-end pd-off-canvas`}>
