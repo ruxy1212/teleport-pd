@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ShoppingCart from '../components/icons/ShoppingCart';
 
-export default function WebLayout({children}){
+export default function WebLayout({children, cartItems = null}){
     const [open, setOpen] = useState(false);
     const location = useLocation();
     return (
@@ -29,13 +29,13 @@ export default function WebLayout({children}){
                 {
                     location.pathname == '/' && 
                     <div className="hidden items-center gap-2 py-2 md:flex">
-                        <ShoppingCart text={13}/>
+                        <ShoppingCart text={cartItems}/>
                         <Link to="/cart" className="py-4 px-9 flex items-center gap-2 bg-pd-black text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Go To Cart<ArrowRight className="h-5 w-5"/></Link>
                     </div>
                 }
                 
                 <div className="flex items-center gap-2 py-2 md:hidden">
-                    <ShoppingCart text={13}/>
+                    <ShoppingCart text={cartItems}/>
                     <button className="flex w-12 h-12 justify-end items-center" onClick={()=>setOpen(true)} >
                         <img src={Menu} alt="" />
                     </button>
@@ -100,4 +100,5 @@ export default function WebLayout({children}){
 }
 WebLayout.propTypes = {
 	children: PropTypes.node,
+    cartItems: PropTypes.number
 };

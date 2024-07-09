@@ -13,6 +13,8 @@ import ProdFavorite from "../components/icons/ProdFavorite"
 import Cart from "../components/icons/Cart"
 import Rating from "../components/Rating"
 import ProdSwitch from "../components/icons/ProdSwitch"
+import { useState } from 'react'
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function Home() {
     const p_categories = [
@@ -38,13 +40,39 @@ export default function Home() {
     ];
 
     const flash_products = [
-        {id:1, img:'Image2.png', title:'Ipad Mini 6', price:'89.000', desc:'Powerful iPads with stunning displays and seamless performance', rating:5, feedbacks:'125', discount: '8'},
-        {id:2, img:'Image2.png', title:'Ipad M1 Air', price:'89.000', desc:'Powerful iPads with stunning displays and seamless performance', rating:5, feedbacks:'125', discount: '8'},
-        {id:1, img:'Image2.png', title:'Ipad Mini 10th Gen', price:'89.000', desc:'Powerful iPads with stunning displays and seamless performance', rating:5, feedbacks:'125', discount: '8'}
+        {id:10, img:'Image2.png', title:'Ipad Mini 6', price:'89.000', desc:'Powerful iPads with stunning displays and seamless performance', rating:5, feedbacks:'125', discount: '8'},
+        {id:11, img:'Image2.png', title:'Ipad M1 Air', price:'89.000', desc:'Powerful iPads with stunning displays and seamless performance', rating:5, feedbacks:'125', discount: '8'},
+        {id:12, img:'Image2.png', title:'Ipad Mini 10th Gen', price:'89.000', desc:'Powerful iPads with stunning displays and seamless performance', rating:5, feedbacks:'125', discount: '8'}
     ];
 
+    const [likedProducts, setLikedProducts] = useLocalStorage("likedProducts", []);
+    const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
+
+    const handleLike = (product) => {
+        setLikedProducts((prev) => {
+        if (prev.includes(product.id)) {
+            return prev.filter((id) => id !== product.id);
+        } else {
+            return [...prev, product.id];
+        }
+        });
+    };
+
+    const addToCart = (product) => {
+        setCartItems((prev) => {
+        const existingItem = prev.find((item) => item.id === product.id);
+        if (existingItem) {
+            return prev.map((item) =>
+            item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+            );
+        } else {
+            return [...prev, { ...product, quantity: 1 }];
+        }
+        });
+    };
+
     return(
-        <WebLayout>
+        <WebLayout cartItems={cartItems.length}>
             <section className="bg-pd-gray">
                 <div className="max-w-[1200px] mx-auto px-4 md:px-6 xl:px-0 flex justify-center gap-16 self-stretch">
                     <div className="flex gap-16 justify-end md:gap-5 max-md:flex-col">
@@ -113,7 +141,7 @@ export default function Home() {
                                 <div key={product.id} className="flex flex-col">
                                     <div className="flex flex-col px-6 py-4 w-full rounded-2xl shadow-lg border border-pd-white backdrop-blur-sm">
                                         <div className="flex flex-col justify-center items-end py-2.5">
-                                            <ProdFavorite/>
+                                            <button style={{ color: likedProducts.includes(product.id) ? "red" : "black" }} onClick={() => handleLike(product)}><ProdFavorite/></button>
                                         </div>
                                         <div className="flex flex-col justify-center px-7 mt-2">
                                             <img loading="lazy" src={"images/products/n"+product.id+".png"} className="w-full aspect-[1.04]" />
@@ -133,7 +161,7 @@ export default function Home() {
                                         </div>
                                     </div>
                                     <div>
-                                        <button className="flex gap-2.5 justify-center px-9 py-4 mt-5 text-base font-medium leading-5 text-black border border-black border-solid rounded-[52px]">
+                                        <button className="flex gap-2.5 justify-center px-9 py-4 mt-5 text-base font-medium leading-5 text-black border border-black border-solid rounded-[52px]"  onClick={() => addToCart(product)}>
                                             <Cart />
                                             <p>Add to Cart</p>
                                         </button> 
