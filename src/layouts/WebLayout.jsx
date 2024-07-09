@@ -15,9 +15,9 @@ export default function WebLayout({children}){
     return (
         <>
             <nav className="flex fixed md:static shadow-lg md:shadow-none top-0 left-0 w-full z-30 justify-between items-center self-stretch py-2 px-4 md:px-6 xl:px-0 bg-pd-white max-w-[1200px] mx-auto ">
-                <a className="logo py-2" href="#">
+                <Link to="/" className="logo py-2" href="#">
                     <Logo />
-                </a>
+                </Link>
                 {/* <ul className="flex gap-6">
                     <li className="uppercase p-4 font-semibold"><a href="#">Home</a></li>
                     <li className="uppercase p-4 font-semibold"><a href="#">Pricing</a></li>
