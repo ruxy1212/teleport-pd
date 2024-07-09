@@ -29,7 +29,7 @@ export default function Home() {
     const new_products = [
         {id:1, img:'Image.png', title:'Iphone 14 Plus', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:4, feedbacks:'125'},
         {id:2, img:'Image2.png', title:'Iphone 14 Plus 2', price:'250.00', desc:'Latest smartphones with top-tier cameras, fast processors.', rating:5, feedbacks:'125'},
-    ]
+    ];
 
     return(
         <WebLayout>
