@@ -27,15 +27,15 @@ export default function Home() {
     ];
 
     const new_products = [
-        {id:1, img:'Image.png', title:'Iphone 14 Plus', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
-        {id:2, img:'Image2.png', title:'Samsung Galaxy Flip 3', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
-        {id:3, img:'Image2.png', title:'Samsung Galaxy Flip 5', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
-        {id:4, img:'Image2.png', title:'Ipad Mini 6', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
-        {id:5, img:'Image2.png', title:'Iphone 12 Pro', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
-        {id:6, img:'Image2.png', title:'Iphone XR', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
-        {id:7, img:'Image2.png', title:'Iphone 8 Plus', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
-        {id:8, img:'Image2.png', title:'Iphone 13 Series', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
-        {id:9, img:'Image2.png', title:'Samsung Galaxy Tab S8', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125'},
+        {id:1, img:'Image.png', title:'Iphone 14 Plus', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
+        {id:2, img:'Image2.png', title:'Samsung Galaxy Flip 3', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
+        {id:3, img:'Image2.png', title:'Samsung Galaxy Flip 5', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
+        {id:4, img:'Image2.png', title:'Ipad Mini 6', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
+        {id:5, img:'Image2.png', title:'Iphone 12 Pro', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
+        {id:6, img:'Image2.png', title:'Iphone XR', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
+        {id:7, img:'Image2.png', title:'Iphone 8 Plus', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
+        {id:8, img:'Image2.png', title:'Iphone 13 Series', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
+        {id:9, img:'Image2.png', title:'Samsung Galaxy Tab S8', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
     ];
 
     const flash_products = [
@@ -187,7 +187,7 @@ export default function Home() {
                                             <div className="flex justify-end">
                                                 <span className="flex justify-center items-center h-[60px] w-[135px] bg-[url('/images/callout.svg')] pd-p-18 font-bold relative bottom-[-23px] right-[-23px]">{product.discount}% Off</span>
                                             </div>
-                                            <img loading="lazy" src={"images/products/f"+product.id+".png"} className="w-full aspect-[1.04]" />
+                                            <img loading="lazy" src={"images/products/n"+product.id+".png"} className="w-full aspect-[1.04]" />
                                             <div className="flex gap-3 self-center mt-4">
                                                 <h3 className="text-[26px] font-montserrat font-bold text-pd-blue">${product.price}</h3>
                                                 <div className="my-auto text-sm font-medium font-montserrat text-pd-mid-gray line-through">IDR 150.00</div>
