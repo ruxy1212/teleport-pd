@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import WebLayout from "../layouts/WebLayout";
 import ChevronRight from "../components/icons/ChevronRight";
 import Plus from "../components/icons/Plus"
@@ -9,6 +10,10 @@ import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function Cart(){
     const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
+    const validCoupons = {"DISCOUNT10": 10, "SALE20": 20, "PROMO30": 30, "EREGE": 50, "RUXY": 50};
+    const [coupon, setCoupon] = useState("");
+    const [couponFeedback, setCouponFeedback] = useState("");
+    const [couponDiscount, setCouponDiscount] = useState(0);  
 
     const changeQuantity = (product, step) => {
       setCartItems((prev) =>
@@ -26,6 +31,15 @@ export default function Cart(){
       cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     const getDiscount = () => 
       cartItems.reduce((totalDiscount, item) => totalDiscount + (item.discount * item.quantity), 0);
+    const applyCoupon = () => {
+      if (validCoupons[coupon.toUpperCase()]) {
+        setCouponDiscount(validCoupons[coupon.toUpperCase()]);
+        setCouponFeedback("Coupon applied successfully!");
+      } else {
+        setCouponFeedback("Invalid or expired coupon code.");
+        setCouponDiscount(0);
+      }
+    };
 
     return (
       <WebLayout cartItems={cartItems.length}>
@@ -231,7 +245,10 @@ export default function Cart(){
               </div>
               <div className="flex gap-5 justify-between mt-6 text-indigo-950">
                 <p>Coupon Applied</p>
-                <p>$0.00</p>
+                <div className="flex flex-col items-end">
+                  <p>$0.00</p>
+                  {couponDiscount > 0 && <p className="text-xs font-montserrat text-pd-red">-{couponDiscount}%</p>}
+                </div>
               </div>
               <div className="shrink-0 mt-8 h-px bg-pd-mid-gray" />
               <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-indigo-950">
@@ -244,10 +261,11 @@ export default function Cart(){
                 <p className="font-semibold">25 July, 2024</p>
               </div>
               <div className="relative px-4 py-2 mt-6 text-gray-400 rounded-sm border border-black border-solid">
-                <input type="text" className="w-full pr-8 border-none outline-none" placeholder="Coupon Code" />
+                <input type="text" className="w-full pr-8 border-none outline-none" placeholder="Coupon Code" value={coupon} onChange={(e) => setCoupon(e.target.value)}/>
                 <div className="absolute w-6 top-2 right-2 aspect-square fill-white">
-                  <button><Trailing /></button>
+                  <button onClick={applyCoupon}><Trailing /></button>
                 </div>
+                <p className={`${couponFeedback === "Coupon applied successfully!" ? "text-pd-green" : "text-pd-red"}`}>{couponFeedback}</p>
               </div>
               <div className="mt-6">
                 <Link to="/checkout" className="mx-auto py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Proceed to Checkout</Link>
