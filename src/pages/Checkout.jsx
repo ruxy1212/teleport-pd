@@ -7,8 +7,8 @@ import Plus from "../components/icons/Plus"
 import Trailing from "../components/icons/Trailing";
 import amex from "../assets/img/icons/amex.svg";
 import discover from "../assets/img/icons/discover.svg";
-import mastercard from "../assets/img/icons/mastercard";
-import visa from "../assets/img/icons/visa";
+// import mastercard from "../assets/img/icons/mastercard";
+// import visa from "../assets/img/icons/visa";
 import Modal from "../components/Modal";
 import AddPayment from "../components/parts/AddPayment";
 import ShowSuccess from "../components/parts/ShowSuccess";
@@ -83,7 +83,7 @@ export default function Checkout(){
                     <p className="text-pd-red pd-p-18 h-[50px] flex justify-center items-center">You have not added any cards yet</p>
                   ):(
                     cards.map((card, index) => {
-                        const cardType = {3: amex, 4: visa, 5: mastercard, 6: discover};
+                        const cardType = {3: amex, 4: amex, 5: discover, 6: discover};
                         // {card.cardNumber[0]}
                     return (
                       <React.Fragment key={index}>
