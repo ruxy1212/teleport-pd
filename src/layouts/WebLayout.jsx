@@ -14,23 +14,23 @@ export default function WebLayout({children, cartItems = null}){
     const location = useLocation();
     return (
         <>
-            <nav className="flex fixed md:static shadow-lg md:shadow-none top-0 left-0 w-full z-30 justify-between items-center self-stretch py-2 px-4 md:px-6 xl:px-0 bg-pd-white max-w-[1200px] mx-auto ">
+            <nav className="flex fixed shadow-md md:shadow-sm top-0 left-0 w-full z-30 justify-between items-center self-stretch py-2 px-4 md:px-6 xl:px-0 bg-pd-white max-w-[1200px] mx-auto ">
                 <Link to="/" className="logo py-2 w-[144px]  md:w-[213px]" href="#">
                     <Logo />
                 </Link>
-                {/* <ul className="flex gap-6">
-                    <li className="uppercase p-4 font-semibold"><a href="#">Home</a></li>
-                    <li className="uppercase p-4 font-semibold"><a href="#">Pricing</a></li>
-                    <li className="uppercase p-4 font-semibold"><a href="#">Events</a></li>
-                    <li className="uppercase p-4 font-semibold"><a href="#">Company</a></li>
-                    <a className="p-4 uppercase font-semibold" href="#">Login</a>
-                </ul> */}
+                <ul className="hidden md:flex gap-0 lg:gap-6">
+                    <li><Link to="/" className="uppercase p-2 lg:p-4 font-semibold">Home</Link></li>
+                    <li><Link to="/pricing" className="uppercase p-2 lg:p-4 font-semibold">Pricing</Link></li>
+                    <li><Link to="/events" className="uppercase p-2 lg:p-4 font-semibold">Events</Link></li>
+                    <li><Link to="/company" className="uppercase p-2 lg:p-4 font-semibold">Company</Link></li>
+                    {/* <a className="p-4 uppercase font-semibold" href="#">Login</a> */}
+                </ul>
                 
                 {
                     location.pathname == '/' && 
                     <div className="hidden items-center gap-2 py-2 md:flex">
                         <ShoppingCart text={cartItems}/>
-                        <Link to="/cart" className="py-4 px-9 flex items-center gap-2 bg-pd-black text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Go To Cart<ArrowRight className="h-5 w-5"/></Link>
+                        <Link to="/cart" className="py-4 px-9 flex items-center gap-2 bg-pd-black text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat"><span className="hide-at-half-md">Go To </span>Cart<ArrowRight className="h-5 w-5"/></Link>
                     </div>
                 }
                 
@@ -49,12 +49,12 @@ export default function WebLayout({children, cartItems = null}){
                         </button>
                     </div>
                     <div className="py-16 flex flex-col justify-between" style={{ height: 'calc(100% - 64px)' }}>
-                        <ul className="flex gap-6">
+                        <ul className="flex flex-col gap-6">
                             <li><Link className="uppercase p-4 font-semibold" to="/">Home</Link></li>
-                            {/* <li className="uppercase p-4 font-semibold"><a href="#">Pricing</a></li>
-                            <li className="uppercase p-4 font-semibold"><a href="#">Events</a></li>
-                            <li className="uppercase p-4 font-semibold"><a href="#">Company</a></li>
-                            <a className="p-4 uppercase font-semibold" href="#">Login</a> */}
+                            <li><Link  className="uppercase p-4 font-semibold" to="/pricing">Pricing</Link></li>
+                            <li><Link  className="uppercase p-4 font-semibold" to="/events">Events</Link></li>
+                            <li><Link  className="uppercase p-4 font-semibold" to="/company">Company</Link></li>
+                            {/* <a className="p-4 uppercase font-semibold" href="#">Login</a> */}
                         </ul>
                         {
                             location.pathname == '/' && 
