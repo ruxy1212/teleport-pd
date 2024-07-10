@@ -1,3 +1,4 @@
+import { useState } from "react"
 import WebLayout from "../layouts/WebLayout"
 import hero from "../assets/img/hero.png"
 import abs_image from "../assets/img/abs_image.png"
@@ -46,6 +47,23 @@ export default function Home() {
 
     const [likedProducts, setLikedProducts] = useLocalStorage("likedProducts", []);
     const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
+    const [onPageOne, setOnPageOne] = useState(true);
+    const [reversed, setReversed] = useState(false);
+    const [product_items, setProductItems] = useState(new_products);
+    const reverseProducts = () => {
+        if (!reversed) {
+            setProductItems([...product_items].reverse());
+            setReversed(true);
+        }
+        setOnPageOne(false);
+    };
+    const reReverseProducts = () => {
+        if(reversed){
+            setProductItems([...product_items].reverse());
+            setReversed(false)
+        }
+        setOnPageOne(true);
+    };
 
     const handleLike = (product) => {
         setLikedProducts((prev) => {
@@ -129,14 +147,14 @@ export default function Home() {
                                 <h2 className="pd-h2 text-pd-black">New <span className="text-pd-red">arrival</span> for you</h2>
                             </div>
                             <div className="flex gap-5 justify-between my-auto">
-                                <button><ProdSwitch style={{fill: 'none', stroke: 'black'}} /></button>
-                                <button><ProdSwitch style={{fill: '#AFE638', stroke: 'none'}} /></button>
+                                <button onClick={reReverseProducts}><ProdSwitch style={{fill: onPageOne?'none':'#AFE638', stroke: onPageOne?'black':'none'}} /></button>
+                                <button onClick={reverseProducts}><ProdSwitch style={{fill: !onPageOne?'none':'#AFE638', stroke: !onPageOne?'black':'none'}} /></button>
                             </div>
                         </div>
                     </div> 
                     <div className="max-w-[1200px] mx-auto px-4 md:px-6 xl:px-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         {
-                            new_products.map(product => (
+                            product_items.map(product => (
                                 <div key={product.id} className="flex flex-col">
                                     <div className="flex flex-col px-6 py-4 w-full rounded-2xl shadow-lg border border-pd-white backdrop-blur-sm">
                                         <div className="flex flex-col justify-center items-end py-2.5">
