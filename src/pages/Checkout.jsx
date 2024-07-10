@@ -7,6 +7,8 @@ import Plus from "../components/icons/Plus"
 import Trailing from "../components/icons/Trailing";
 import amex from "../assets/img/icons/amex.svg";
 import discover from "../assets/img/icons/discover.svg";
+import mastercard from "../assets/img/icons/mastercard";
+import visa from "../assets/img/icons/visa";
 import Modal from "../components/Modal";
 import AddPayment from "../components/parts/AddPayment";
 import ShowSuccess from "../components/parts/ShowSuccess";
@@ -80,7 +82,10 @@ export default function Checkout(){
                   cards.length < 1 ? (
                     <p className="text-pd-red pd-p-18 h-[50px] flex justify-center items-center">You have not added any cards yet</p>
                   ):(
-                    cards.map((card, index) => (
+                    cards.map((card, index) => {
+                        const cardType = {3: amex, 4: visa, 5: mastercard, 6: discover};
+                        // {card.cardNumber[0]}
+                    return (
                       <React.Fragment key={index}>
                         <div className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full p-2 pb-0 md:pb-2">
                           <div className="flex gap-0 md:gap-5 justify-between flex-col md:flex-row">
@@ -90,7 +95,7 @@ export default function Checkout(){
                                   <input type="radio" name="radio_payment" id="rad1" className="w-6 h-6 accent-pd-blue" />
                                 </div>
                               </div>
-                              <img loading="lazy" src={amex} className="shrink-0 my-auto w-6 aspect-[1.41]"/>
+                              <img loading="lazy" src={cardType[card.cardNumber[0]]} className="shrink-0 my-auto w-6 aspect-[1.41]"/>
                               <div className="pd-p font-semibold leading-6 text-pd-black"> •••• {card.cardNumber.replace(/\s/g, "").slice(-4)}</div>
                             </div>
                             <div className="pd-p leading-6 text-gray-400">Expires {card.expiryDate.replace('/', '/20')}</div>
@@ -99,7 +104,8 @@ export default function Checkout(){
                         </div>
                         {index < cards.length - 1 && <hr className="shrink-0 my-2 h-0 border-t border-pd-black border-solid max-md:max-w-full" />}
                       </React.Fragment>
-                    ))
+                    )
+                    })
                   )
                 }
               </div>
