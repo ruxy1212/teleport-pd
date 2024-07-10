@@ -73,6 +73,13 @@
 button:hover{
   opacity: .6;
 }
+footer li a{
+  transition: all .4s;
+}
+footer li a:hover{
+  color: #DF1406;
+  margin-left: 4px;
+}
 /* sm: '480px',
       md: '768px',
       lg: '976px',
