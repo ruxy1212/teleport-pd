@@ -13,6 +13,10 @@ import ShowSuccess from "../components/parts/ShowSuccess";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function Checkout(){
+    const initialCards = [
+      { cardNumber: "1234 5678 9012 3456", cvv: "123", expiryDate: "12/24" },
+      { cardNumber: "9876 5432 1098 7654", cvv: "456", expiryDate: "11/23" },
+    ];
     const location = useLocation();
     const { price } = location.state || { price: 0 };
     const { discount } = location.state || { discount: 0 };
@@ -26,7 +30,7 @@ export default function Checkout(){
     const [couponDiscount, setCouponDiscount] = useState(coupon);
     const deliveryDate = getNextWeekFriday();
 
-    const [cards, setCards] = useLocalStorage("cards", []);
+    const [cards, setCards] = useLocalStorage("cards", initialCards);
 
     const addCard = (newCard) => {
       setCards([...cards, newCard]);

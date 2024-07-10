@@ -9,7 +9,10 @@ import Trailing from "../components/icons/Trailing";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function Cart(){
-    const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
+    const InitialCart = [
+       {id:1, img:'Image.png', title:'Iphone 14 Plus', price:225.00, desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: 0, quantity: 1},
+    ];
+    const [cartItems, setCartItems] = useLocalStorage("cartItems", InitialCart);
     const validCoupons = {"DISCOUNT10": 10, "SALE20": 20, "PROMO30": 30, "EREGE": 50, "RUXY": 50};
     const [coupon, setCoupon] = useState("");
     const [couponFeedback, setCouponFeedback] = useState("");
