@@ -113,9 +113,9 @@ export default function Home() {
                         </div>
                         <div className="relative flex flex-col ml-5 w-[34%] max-md:ml-0 max-md:w-full">
                             <div className="">
-                                <img loading="lazy" src={abs_image} className="z-10 absolute bottom-16 right-4 md:-left-20 lg:-left-28 shrink-0 aspect-[1.22] w-[189px]"/>
+                                <img loading="lazy" src={abs_image} className="z-10 absolute bottom-16 right-4 md:-left-20 lg:-left-28 shrink-0 w-[189px]"/>
                             </div>
-                            <img loading="lazy" src={hero} className="grow w-full max-w-[350px] aspect-[0.61] mx-auto md:mx-0"/>
+                            <img loading="lazy" src={hero} className="grow w-full max-w-[350px] mx-auto md:mx-0"/>
                         </div>
                     </div>
                 </div>
@@ -161,7 +161,7 @@ export default function Home() {
                                             <button style={{ color: likedProducts.includes(product.id) ? "red" : "black" }} onClick={() => handleLike(product)}><ProdFavorite/></button>
                                         </div>
                                         <div className="flex flex-col justify-center px-7 mt-2">
-                                            <img loading="lazy" src={"images/products/n"+product.id+".png"} className="w-full aspect-[1.04]" />
+                                            <img loading="lazy" src={"images/products/n"+product.id+".png"} className="w-full" />
                                         </div>
                                     </div>
                                     <div className="flex gap-5 px-5 mt-10 text-2xl font-extrabold text-pd-black">
@@ -205,7 +205,7 @@ export default function Home() {
                                             <div className="flex justify-end">
                                                 <span className="flex justify-center items-center h-[60px] w-[135px] bg-[url('/images/callout.svg')] pd-p-18 font-bold relative bottom-[-23px] right-[-23px]">{product.discount}% Off</span>
                                             </div>
-                                            <img loading="lazy" src={"images/products/n"+product.id+".png"} className="w-full aspect-[1.04]" />
+                                            <img loading="lazy" src={"images/products/n"+product.id+".png"} className="w-full" />
                                             <div className="flex gap-3 self-center mt-4">
                                                 <h3 className="text-[26px] font-montserrat font-bold text-pd-blue">${product.price}</h3>
                                                 <div className="my-auto text-sm font-medium font-montserrat text-pd-mid-gray line-through">IDR 150.00</div>
@@ -225,7 +225,7 @@ export default function Home() {
                                         </div>
                                     </div>
                                     <div>
-                                        <button className="flex gap-2.5 justify-center px-9 py-4 mt-5 text-base font-medium leading-5 text-black border border-black border-solid rounded-[52px]">
+                                        <button className="flex gap-2.5 justify-center px-9 py-4 mt-5 text-base font-medium leading-5 text-black border border-black border-solid rounded-[52px]" onClick={() => addToCart(product)}>
                                             <Cart />
                                             <p>Add to Cart</p>
                                         </button> 

@@ -15,7 +15,7 @@ export default function WebLayout({children, cartItems = null}){
     return (
         <>
             <nav className="flex fixed md:static shadow-lg md:shadow-none top-0 left-0 w-full z-30 justify-between items-center self-stretch py-2 px-4 md:px-6 xl:px-0 bg-pd-white max-w-[1200px] mx-auto ">
-                <Link to="/" className="logo py-2" href="#">
+                <Link to="/" className="logo py-2 w-[144px]  md:w-[213px]" href="#">
                     <Logo />
                 </Link>
                 {/* <ul className="flex gap-6">
