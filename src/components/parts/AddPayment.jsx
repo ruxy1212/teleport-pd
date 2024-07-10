@@ -37,24 +37,20 @@ export default function AddPayment({ addCard, onClose }) {
     <div className="flex flex-col justify-between">
       <h3 className="self-start mt-6 pd-h3 leading-8 text-pd-black">Add Payment Method</h3>
       <form onSubmit={submitCard}>
-        <div className="mt-8">
+        <div className="mt-4 md:mt-8">
             <label className="pd-p-18 font-semibold text-pd-black">Card Number</label>
-            <div className="justify-center px-4 py-3 mt-4 rounded-sm border-2 border-black border-solid text-pd-black">
-                <input type="text" value={cardNumber} onChange={onCardNumber} maxLength="19" required placeholder="1234 5678 9101 1121" className="pd-p border-none outline-none"/>
+            <div className="justify-center ">
+                <input type="text" value={cardNumber} onChange={onCardNumber} maxLength="19" required placeholder="1234 5678 9101 1121" className="pd-p px-4 py-3 mt-2 md:mt-4 rounded-sm border border-pd-black border-solid text-pd-black w-full"/>
             </div>
         </div>
-        <div className="flex gap-4 mt-8">
+        <div className="grid grid-cols-2 gap-3 md:gap-4 mt-4 md:mt-8">
             <div className="mt-4 flex-1">
                 <label className="pd-p-18 font-semibold text-pd-black">Expiration Date</label>
-                <div className="justify-center px-4 py-3 mt-4 rounded-sm border-2 border-black border-solid text-pd-black">
-                    <input type="text" placeholder="MM/YY" value={expiryDate} onChange={onExpiryDate} maxLength="5" required className="pd-p w-28 border-none outline-none"/>
-                </div>
+                <input type="text" placeholder="MM/YY" value={expiryDate} onChange={onExpiryDate} maxLength="5" required className="pd-p w-full px-4 py-3 mt-2 md:mt-4 rounded-sm border border-pd-black border-solid text-pd-black"/>
             </div>
             <div className="mt-4 flex-1">
                 <label className="pd-p-18 font-semibold text-pd-black">CVV</label>
-                <div className="justify-center px-4 py-3 mt-4 rounded-sm border-2 border-black border-solid text-pd-black">
-                    <input type="text" placeholder="123" value={cvv} onChange={(e) => setCvv(e.target.value)} maxLength="4" required className="pd-p w-28 border-none outline-none"/>
-                </div>
+                <input type="text" placeholder="123" value={cvv} onChange={(e) => setCvv(e.target.value)} maxLength="4" required className="pd-p w-full px-4 py-3 mt-2 md:mt-4 rounded-sm border border-pd-black border-solid text-pd-black"/>
             </div>
         </div>
         <div>

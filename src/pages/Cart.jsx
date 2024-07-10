@@ -276,7 +276,7 @@ export default function Cart(){
               </div>
               <p className={`${couponFeedback === "Coupon applied successfully!" ? "text-pd-green" : "text-pd-red"}`}>{couponFeedback}</p>
               <div className="mt-6">
-                <button onClick={proceedToPayment} className="mx-auto py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Proceed to Checkout</button>
+                <button onClick={proceedToPayment} className="w-full py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat pd-button">Proceed to Checkout</button>
               </div>
             </div>
           </div>

@@ -143,6 +143,9 @@ footer li a:hover{
   .hero-badge-text{
     font-size: 41px;
   }
+  .pd-button{
+    font-size: 15px;
+  }
 }
 
 @media only screen and (max-width: 480px){ 
@@ -153,7 +156,7 @@ footer li a:hover{
     font-size: 36px;
   }
   .pd-h3{
-    font-size: 20px;
+    font-size: 18px;
   }
   .pd-p{
     font-size: 14px;
@@ -163,6 +166,9 @@ footer li a:hover{
   }
   .hero-badge-text{
     font-size: 38px;
+  }
+  .pd-button{
+    font-size: 14px;
   }
 }
 

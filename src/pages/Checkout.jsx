@@ -82,7 +82,7 @@ export default function Checkout(){
                   ):(
                     cards.map((card, index) => (
                       <React.Fragment key={index}>
-                        <div className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full p-2">
+                        <div className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full p-2 pb-0 md:pb-2">
                           <div className="flex gap-0 md:gap-5 justify-between flex-col md:flex-row">
                             <div className="flex gap-3.5">
                               <div className="flex flex-col justify-center p-0.5">
@@ -97,16 +97,16 @@ export default function Checkout(){
                           </div>
                           <button onClick={() => removeCard(index)} className="text-pd-red pd-p font-semibold">Remove</button>
                         </div>
-                        {index < cards.length - 1 && <div className="shrink-0 mt-2 h-px border border-pd-black border-solid max-md:max-w-full" />}
+                        {index < cards.length - 1 && <hr className="shrink-0 my-2 h-0 border-t border-pd-black border-solid max-md:max-w-full" />}
                       </React.Fragment>
                     ))
                   )
                 }
               </div>
 
-              <div className="shrink-0 mt-8 h-px bg-black border border-black border-solid max-md:max-w-full" />
+              <hr className="shrink-0 mt-0 md:mt-8 h-0 border-t border-pd-black border-solid max-md:max-w-full" />
 
-              <button className="flex gap-4 justify-center self-start mt-8 font-semibold leading-6 rounded font-montserrat" onClick={()=>setShowPayment(true)}>
+              <button className="flex gap-4 justify-center self-start mt-0 md:mt-8 font-semibold leading-6 rounded font-montserrat" onClick={()=>setShowPayment(true)}>
                 <Plus />
                 <span>Add Payment method</span>
               </button>
@@ -153,7 +153,7 @@ export default function Checkout(){
               </div>
               <p className={`${couponFeedback === "Coupon applied successfully!" ? "text-pd-green" : "text-pd-red"}`}>{couponFeedback}</p>
               <div className="mt-6">
-                <button onClick={()=>setShowSuccess(true)} className="mx-auto py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Place Your Order and Pay</button>
+                <button onClick={()=>setShowSuccess(true)} className="w-full py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Place Your Order and Pay</button>
               </div>
             </div>
           </div>
