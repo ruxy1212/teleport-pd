@@ -15,6 +15,7 @@ import Cart from "../components/icons/Cart"
 import Rating from "../components/Rating"
 import ProdSwitch from "../components/icons/ProdSwitch"
 import useLocalStorage from "../hooks/useLocalStorage";
+import Popup from "../components/Popup"
 
 export default function Home() {
     const p_categories = [
@@ -45,6 +46,7 @@ export default function Home() {
         {id:12, img:'Image2.png', title:'Ipad Mini 10th Gen', price:'89.000', desc:'Powerful iPads with stunning displays and seamless performance', rating:5, feedbacks:'125', discount: '8'}
     ];
 
+    const [message, setMessage] = useState(null);
     const [likedProducts, setLikedProducts] = useLocalStorage("likedProducts", []);
     const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
     const [onPageOne, setOnPageOne] = useState(true);
@@ -79,14 +81,23 @@ export default function Home() {
         setCartItems((prev) => {
         const existingItem = prev.find((item) => item.id === product.id);
         if (existingItem) {
+            showPopup(`Item is already in cart`);
             return prev.map((item) =>
             item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
             );
         } else {
+            showPopup(`Item added to cart`);
             return [...prev, { ...product, quantity: 1 }];
         }
         });
     };
+
+    const showPopup = (message) => {
+        setMessage(message);
+        setTimeout(() => {
+          setMessage(null);
+        }, 5000);
+      };
 
     return(
         <WebLayout cartItems={cartItems.length}>
@@ -236,6 +247,7 @@ export default function Home() {
                     </div>
                 </section>
             </main>
+            {message && <Popup message={message} duration={5000} onClose={() => setMessage(null)} />}
         </WebLayout>
     )
 }

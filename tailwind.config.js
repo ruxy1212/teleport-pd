@@ -25,7 +25,30 @@ export default {
       prompt: ['"Prompt"', ...defaultTheme.fontFamily.sans],
       montserrat: ['"Montserrat"', ...defaultTheme.fontFamily.sans]
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        'bounce-in': {
+          '0%, 100%': {
+            transform: 'scale(0.95)',
+          },
+          '50%': {
+            transform: 'scale(1.05)',
+          },
+        },
+        'bounce-out': {
+          '0%, 100%': {
+            transform: 'scale(1.05)',
+          },
+          '50%': {
+            transform: 'scale(0.95)',
+          },
+        },
+      },
+      animation: {
+        'bounce-in': 'bounce-in 0.5s ease-in-out',
+        'bounce-out': 'bounce-out 0.5s ease-in-out',
+      },
+    },
   },
   plugins: [],
 }
