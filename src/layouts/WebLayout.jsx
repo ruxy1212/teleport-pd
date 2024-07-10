@@ -25,14 +25,14 @@ export default function WebLayout({children, cartItems = null}){
                     <li><Link to="/company" className="uppercase p-2 lg:p-4 font-semibold">Company</Link></li>
                     {/* <a className="p-4 uppercase font-semibold" href="#">Login</a> */}
                 </ul>
-                
+{/*                 
                 {
-                    location.pathname == '/' && 
-                    <div className="hidden items-center gap-2 py-2 md:flex">
+                    location.pathname == '/' &&  */}
+                    <div className={`${location.pathname=='/'?'':'invisible'} items-center gap-2 py-2 md:flex`}>
                         <ShoppingCart text={cartItems}/>
                         <Link to="/cart" className="py-4 px-9 flex items-center gap-2 bg-pd-black text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat"><span className="hide-at-half-md">Go To </span>Cart<ArrowRight className="h-5 w-5"/></Link>
                     </div>
-                }
+                {/* } */}
                 
                 <div className="flex items-center gap-2 py-2 md:hidden">
                     <Link to="/cart"><ShoppingCart text={cartItems}/></Link>
@@ -73,24 +73,24 @@ export default function WebLayout({children, cartItems = null}){
                     <div className="flex flex-col gap-0 md:gap-3 w-full">
                         <h3 className="text-[22px] font-extrabold font-montserrat">Company</h3>
                         <ul>
-                            <li className="font-normal py-1 font-montserrat leading-5 lg:leading-7"><a href="#">About Us</a></li>
-                            <li className="font-normal py-1 font-montserrat leading-5 lg:leading-7"><a href="#">Products Digital</a></li>
-                            <li className="font-normal py-1 font-montserrat leading-5 lg:leading-7"><a href="#">Customer Reviews</a></li>
+                            <li className="font-normal py-1 font-montserrat leading-5 lg:leading-7"><Link to="/page404">About Us</Link></li>
+                            <li className="font-normal py-1 font-montserrat leading-5 lg:leading-7"><Link to="/page404">Products Digital</Link></li>
+                            <li className="font-normal py-1 font-montserrat leading-5 lg:leading-7"><Link to="/page404">Customer Reviews</Link></li>
                         </ul>
                     </div>
                     <div className="flex flex-col gap-0 md:gap-3 w-full">
                         <h3 className="text-[22px] font-extrabold font-montserrat">Information</h3>
                         <ul>
-                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#">Help Center</a></li>
-                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#">Payment Methods</a></li>
-                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#">Return & Refund</a></li>
+                            <li className="font-normal py-1 font-montserrat leading-7"><Link to="/page404">Help Center</Link></li>
+                            <li className="font-normal py-1 font-montserrat leading-7"><Link to="/page404">Payment Methods</Link></li>
+                            <li className="font-normal py-1 font-montserrat leading-7"><Link to="/page404">Return & Refund</Link></li>
                         </ul>
                     </div>
                     <div className="flex flex-col gap-0 md:gap-3 w-full">
                         <h3 className="text-[22px] font-extrabold font-montserrat">Contact</h3>
                         <ul>
-                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#"><Email className="inline-block me-2"/>(+1) 123-456-7890</a></li>
-                            <li className="font-normal py-1 font-montserrat leading-7"><a href="#"><Phone className="inline-block me-2"/>email@youremail.com</a></li>
+                            <li className="font-normal py-1 font-montserrat leading-7"><Link to="/page404"><Email className="inline-block me-2"/>(+1) 123-456-7890</Link></li>
+                            <li className="font-normal py-1 font-montserrat leading-7"><Link to="/page404"><Phone className="inline-block me-2"/>email@youremail.com</Link></li>
                         </ul>
                     </div>
                 </div>

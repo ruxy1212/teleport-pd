@@ -14,6 +14,7 @@ import Modal from "../components/Modal";
 import AddPayment from "../components/parts/AddPayment";
 import ShowSuccess from "../components/parts/ShowSuccess";
 import useLocalStorage from "../hooks/useLocalStorage";
+import Popup from "../components/Popup"
 
 export default function Checkout(){
     const initialCards = [
@@ -31,12 +32,14 @@ export default function Checkout(){
     const [couponCode, setCoupon] = useState("");
     const [couponFeedback, setCouponFeedback] = useState("");
     const [couponDiscount, setCouponDiscount] = useState(coupon);
+    const [message, setMessage] = useState(null);
     // const deliveryDate = getNextWeekFriday();
 
     const [cards, setCards] = useLocalStorage("cards", initialCards);
 
     const addCard = (newCard) => {
       setCards([...cards, newCard]);
+      showPopup(`Payment card added successfully`);
     };
 
     const applyCoupon = () => {
@@ -56,6 +59,14 @@ export default function Checkout(){
 
     const removeCard = (cardIndex) => {
       setCards(cards.filter((_, index) => index !== cardIndex));
+      showPopup(`Payment card removed successfully`);
+    };
+
+    const showPopup = (message) => {
+      setMessage(message);
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
     };
 
     return (
@@ -96,7 +107,7 @@ export default function Checkout(){
                                 </div>
                               </div>
                               <img loading="lazy" src={Object.hasOwn(cardType, card.cardNumber[0])?cardType[card.cardNumber[0]]:pdcard} className="shrink-0 my-auto w-6 aspect-[1.41]"/>
-                              <div className="pd-p font-semibold leading-6 text-pd-black"> •••• {card.cardNumber.replace(/\s/g, "").slice(-4)}</div>
+                              <div className="pd-p font-semibold leading-6 text-pd-black"> •••• {card.cardNumber}</div>
                             </div>
                             <div className="pd-p leading-6 text-gray-400">Expires {card.expiryDate.replace('/', '/20')}</div>
                           </div>
@@ -164,6 +175,7 @@ export default function Checkout(){
             </div>
           </div>
         </div>
+        {message && <Popup message={message} duration={5000} onClose={() => setMessage(null)} />}
       </div>
         </WebLayout>
     );

@@ -87,7 +87,7 @@ export default function Cart(){
                       <div className="flex flex-wrap">
                         <div className="flex flex-col w-full lg:w-[57%]">
                           <div className="flex flex-col max-w-[350px] justify-center items-center px-6 py-4 w-full rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
-                            <img loading="lazy" src={"images/products/n"+cartItems[0].id+".png"} className="w-full aspect-[1.05]"/>
+                            <img loading="lazy" src={"images/products/n"+cartItems[0].id+".png"} className="w-full"/>
                           </div>
                         </div>
                         <div className="pl-5 w-full lg:w-[43%]">
@@ -118,7 +118,7 @@ export default function Cart(){
                         <div key={item.id} className="flex-row-at-half-md flex flex-col sm:flex-row gap-11 items-center">{console.log(item.discount)}
                           <div className="flex flex-col w-full with-at-half-md md:w-[150px]">
                             <div className="flex flex-col w-full with-at-half-md md:w-[150px] justify-center items-center px-6 py-4 rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
-                              <img loading="lazy" src={"images/products/n"+item.id+".png"} className="w-full aspect-[1.05]"/>
+                              <img loading="lazy" src={"images/products/n"+item.id+".png"} className="w-full"/>
                             </div>
                           </div>
                           <div className="w-full with-at-half-md lg:w-[43%]">
