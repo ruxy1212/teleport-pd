@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import WebLayout from "../layouts/WebLayout";
 import { Link, useLocation } from "react-router-dom";
-import { getNextWeekFriday } from '../hooks/nextWeekFriday';
+// import { getNextWeekFriday } from '../hooks/nextWeekFriday';
 import ChevronRight from "../components/icons/ChevronRight";
 import Plus from "../components/icons/Plus"
 import Trailing from "../components/icons/Trailing";
 import amex from "../assets/img/icons/amex.svg";
 import discover from "../assets/img/icons/discover.svg";
-// import mastercard from "../assets/img/icons/mastercard";
-// import visa from "../assets/img/icons/visa";
+import mastercard from "../assets/img/icons/mastercard.svg";
+import pdcard from "../assets/img/icons/pdcard.svg";
+import visa from "../assets/img/icons/visa.svg";
 import Modal from "../components/Modal";
 import AddPayment from "../components/parts/AddPayment";
 import ShowSuccess from "../components/parts/ShowSuccess";
@@ -25,12 +26,12 @@ export default function Checkout(){
     const { coupon } = location.state || { coupon: 0 };
     const [showPayment, setShowPayment] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
-    const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
+    const cartItems = useLocalStorage("cartItems", []);
     const validCoupons = {"DISCOUNT10": 10, "SALE20": 20, "PROMO30": 30, "EREGE": 50, "RUXY": 50};
     const [couponCode, setCoupon] = useState("");
     const [couponFeedback, setCouponFeedback] = useState("");
     const [couponDiscount, setCouponDiscount] = useState(coupon);
-    const deliveryDate = getNextWeekFriday();
+    // const deliveryDate = getNextWeekFriday();
 
     const [cards, setCards] = useLocalStorage("cards", initialCards);
 
@@ -83,8 +84,7 @@ export default function Checkout(){
                     <p className="text-pd-red pd-p-18 h-[50px] flex justify-center items-center">You have not added any cards yet</p>
                   ):(
                     cards.map((card, index) => {
-                        const cardType = {3: amex, 4: amex, 5: discover, 6: discover};
-                        // {card.cardNumber[0]}
+                        const cardType = {3: amex, 4: visa, 5: mastercard, 6: discover};
                     return (
                       <React.Fragment key={index}>
                         <div className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full p-2 pb-0 md:pb-2">
@@ -95,7 +95,7 @@ export default function Checkout(){
                                   <input type="radio" name="radio_payment" id="rad1" className="w-6 h-6 accent-pd-blue" />
                                 </div>
                               </div>
-                              <img loading="lazy" src={cardType[card.cardNumber[0]]} className="shrink-0 my-auto w-6 aspect-[1.41]"/>
+                              <img loading="lazy" src={Object.hasOwn(cardType, card.cardNumber[0])?cardType[card.cardNumber[0]]:pdcard} className="shrink-0 my-auto w-6 aspect-[1.41]"/>
                               <div className="pd-p font-semibold leading-6 text-pd-black"> •••• {card.cardNumber.replace(/\s/g, "").slice(-4)}</div>
                             </div>
                             <div className="pd-p leading-6 text-gray-400">Expires {card.expiryDate.replace('/', '/20')}</div>

@@ -262,7 +262,6 @@ export default function Cart(){
               <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-pd-black">
                 <p>TOTAL</p>
                 <p className="font-semibold text-right">${(getTotal()-getDiscount())-(couponDiscount/100*(getTotal()-getDiscount()))}</p>
-                {/* $288.08 */}
               </div>
               <div className="flex gap-5 justify-between mt-6 text-pd-black">
                 <p>Estimated Delivery by</p>
