@@ -63,7 +63,7 @@ export default function WebLayout({children, cartItems = null}){
                     </div>
                 </nav>
             </div>
-            <div className="mt-20 md:mt-0 mb-28 lg:mb-36">{children}</div>
+            <div className="mt-20 mb-28 lg:mb-36">{children}</div>
             <footer className="max-w-[1200px] mx-auto px-4 md:px-6 xl:px-0 py-14 flex justify-between gap-6 lg:gap-12 flex-wrap lg:flex-nowrap">
                 <div className="flex flex-col justify-between max-w-96 gap-2 md:gap-6 lg:gap-12">
                     <Logo />

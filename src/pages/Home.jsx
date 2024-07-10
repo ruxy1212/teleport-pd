@@ -70,8 +70,10 @@ export default function Home() {
     const handleLike = (product) => {
         setLikedProducts((prev) => {
         if (prev.includes(product.id)) {
+            showPopup(`Removed from favorites`);
             return prev.filter((id) => id !== product.id);
         } else {
+            showPopup(`Added to favorites`);
             return [...prev, product.id];
         }
         });
