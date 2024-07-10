@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import WebLayout from "../layouts/WebLayout";
 import { Link, useLocation } from "react-router-dom";
 import { getNextWeekFriday } from '../hooks/nextWeekFriday';
@@ -26,6 +26,12 @@ export default function Checkout(){
     const [couponDiscount, setCouponDiscount] = useState(coupon);
     const deliveryDate = getNextWeekFriday();
 
+    const [cards, setCards] = useLocalStorage("cards", []);
+
+    const addCard = (newCard) => {
+      setCards([...cards, newCard]);
+    };
+
     const applyCoupon = () => {
       if (validCoupons[couponCode.toUpperCase()]) {
         setCouponDiscount(validCoupons[couponCode.toUpperCase()]);
@@ -41,10 +47,14 @@ export default function Checkout(){
       setShowSuccess(false);
     }
 
+    const removeCard = (cardIndex) => {
+      setCards(cards.filter((_, index) => index !== cardIndex));
+    };
+
     return (
         <WebLayout cartItems={cartItems.length}>
           <Modal open={showPayment} setOpen={setOpen}>
-            <AddPayment></AddPayment>
+            <AddPayment addCard={addCard} onClose={() => setShowPayment(false)}></AddPayment>
           </Modal>
           <Modal open={showSuccess} setOpen={setOpen}>
             <ShowSuccess></ShowSuccess>
@@ -62,40 +72,32 @@ export default function Checkout(){
               </div>
               <div className="flex flex-col justify-between py-2 mt-6 rounded border border-black border-solid max-md:max-w-full">
 {/* starts here */}
-                <div className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full p-2">
-                  <div className="flex gap-0 md:gap-5 justify-between flex-col md:flex-row">
-                    <div className="flex gap-3.5">
-                      <div className="flex flex-col justify-center p-0.5">
-                        <div className="flex flex-col justify-center items-center">
-                          <input type="radio" name="radio_payment" id="rad1" className="w-6 h-6 accent-pd-blue" />
+                {
+                  cards.length < 1 ? (
+                    <p className="text-pd-red pd-p-18 h-[50px] flex justify-center items-center">You have not added any cards yet</p>
+                  ):(
+                    cards.map((card, index) => (
+                      <React.Fragment key={index}>
+                        <div className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full p-2">
+                          <div className="flex gap-0 md:gap-5 justify-between flex-col md:flex-row">
+                            <div className="flex gap-3.5">
+                              <div className="flex flex-col justify-center p-0.5">
+                                <div className="flex flex-col justify-center items-center">
+                                  <input type="radio" name="radio_payment" id="rad1" className="w-6 h-6 accent-pd-blue" />
+                                </div>
+                              </div>
+                              <img loading="lazy" src={amex} className="shrink-0 my-auto w-6 aspect-[1.41]"/>
+                              <div className="pd-p font-semibold leading-6 text-pd-black"> •••• {card.cardNumber.replace(/\s/g, "").slice(-4)}</div>
+                            </div>
+                            <div className="pd-p leading-6 text-gray-400">Expires {card.expiryDate.replace('/', '/20')}</div>
+                          </div>
+                          <button onClick={() => removeCard(index)} className="text-pd-red pd-p font-semibold">Remove</button>
                         </div>
-                      </div>
-                      <img loading="lazy" src={amex} className="shrink-0 my-auto w-6 aspect-[1.41]"/>
-                      <div className="pd-p font-semibold leading-6 text-pd-black"> •••• 6754</div>
-                    </div>
-                    <div className="pd-p leading-6 text-gray-400">Expires 06/2027</div>
-                  </div>
-                  <button className="text-pd-red pd-p font-semibold">Remove</button>
-                </div>
-              
-                <div className="shrink-0 mt-2 h-px border border-pd-black border-solid max-md:max-w-full" />
-
-                <div className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full p-2">
-                  <div className="flex gap-0 md:gap-5 justify-between flex-col md:flex-row">
-                    <div className="flex gap-3.5">
-                      <div className="flex flex-col justify-center p-0.5">
-                        <div className="flex flex-col justify-center items-center">
-                          <input type="radio" name="radio_payment" id="rad1" className="w-6 h-6 accent-pd-blue" />
-                        </div>
-                      </div>
-                      <img loading="lazy" src={discover} className="shrink-0 my-auto w-6 aspect-[1.41]"/>
-                      <div className="pd-p font-semibold leading-6 text-pd-black"> •••• 3754</div>
-                    </div>
-                    <div className="pd-p leading-6 text-gray-400">Expires 06/2025</div>
-                  </div>
-                  <button className="text-pd-red pd-p font-semibold">Remove</button>
-                </div>
-
+                        {index < cards.length - 1 && <div className="shrink-0 mt-2 h-px border border-pd-black border-solid max-md:max-w-full" />}
+                      </React.Fragment>
+                    ))
+                  )
+                }
               </div>
 
               <div className="shrink-0 mt-8 h-px bg-black border border-black border-solid max-md:max-w-full" />
