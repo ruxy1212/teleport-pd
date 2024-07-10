@@ -28,7 +28,7 @@ export default function WebLayout({children, cartItems = null}){
 {/*                 
                 {
                     location.pathname == '/' &&  */}
-                    <div className={`${location.pathname=='/'?'':'invisible'} items-center gap-2 py-2 md:flex`}>
+                    <div className={`${location.pathname=='/'?'':'invisible p-0'} items-center gap-2 py-2 md:flex`}>
                         <ShoppingCart text={cartItems}/>
                         <Link to="/cart" className="py-4 px-9 flex items-center gap-2 bg-pd-black text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat"><span className="hide-at-half-md">Go To </span>Cart<ArrowRight className="h-5 w-5"/></Link>
                     </div>
