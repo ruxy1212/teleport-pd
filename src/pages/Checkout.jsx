@@ -11,10 +11,12 @@ import discover from "../assets/img/icons/discover.svg";
 import Modal from "../components/Modal";
 import AddPayment from "../components/parts/AddPayment";
 import ShowSuccess from "../components/parts/ShowSuccess";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function Checkout(){
     const [showPayment, setShowPayment] = useState(false);
-    const [showSuccess, setShowSuccess] = useState(true);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
 
     const setOpen = () => {
       setShowPayment(false);
@@ -22,7 +24,7 @@ export default function Checkout(){
     }
 
     return (
-        <WebLayout>
+        <WebLayout cartItems={cartItems.length}>
           <Modal open={showPayment} setOpen={setOpen}>
             <AddPayment></AddPayment>
           </Modal>
@@ -116,9 +118,9 @@ export default function Checkout(){
                 <p>Estimated Delivery by</p>
                 <p className="font-semibold">25 July, 2024</p>
               </div>
-              <div className="flex gap-4 p-4 mt-6 text-gray-400 rounded-sm border border-black border-solid">
-                <input type="text" className="flex-1 border-none outline-none" placeholder="Coupon Code" />
-                <div className="shrink-0 w-6 aspect-square fill-white">
+              <div className="relative px-4 py-2 mt-6 text-gray-400 rounded-sm border border-black border-solid">
+                <input type="text" className="w-full pr-8 border-none outline-none" placeholder="Coupon Code" />
+                <div className="absolute w-6 top-2 right-2 aspect-square fill-white">
                   <button><Trailing /></button>
                 </div>
               </div>

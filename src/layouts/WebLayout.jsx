@@ -35,7 +35,7 @@ export default function WebLayout({children, cartItems = null}){
                 }
                 
                 <div className="flex items-center gap-2 py-2 md:hidden">
-                    <ShoppingCart text={cartItems}/>
+                    <Link to="/cart"><ShoppingCart text={cartItems}/></Link>
                     <button className="flex w-12 h-12 justify-end items-center" onClick={()=>setOpen(true)} >
                         <img src={Menu} alt="" />
                     </button>

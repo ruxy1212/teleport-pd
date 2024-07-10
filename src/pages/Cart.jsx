@@ -10,11 +10,11 @@ import useLocalStorage from "../hooks/useLocalStorage";
 export default function Cart(){
     const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
 
-    const changeQuantity = (product, delta) => {
+    const changeQuantity = (product, step) => {
       setCartItems((prev) =>
         prev.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: Math.max(1, item.quantity + delta) }
+            ? { ...item, quantity: Math.max(1, item.quantity + step) }
             : item
         )
       );
@@ -22,7 +22,7 @@ export default function Cart(){
     const getTotal = () =>
       cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     return (
-      <WebLayout>
+      <WebLayout cartItems={cartItems.length}>
         <div className="max-w-[1200px] mx-auto mt-6 px-4 md:px-6 xl:px-0">
           <div className="flex gap-5 flex-col md:flex-row">
             <div className="flex flex-col grow w-full md:w-[67%] gap-8">
@@ -37,33 +37,33 @@ export default function Cart(){
                 </div>
               </div>
               <div className="mt-1">
-                <div className="flex gap-0 md:gap-5 flex-col md:flex-col">
+                <div className={`${cartItems.length>1?'h-[500px]':''} overflow-y-auto`}>
                   {/* multi and single */}
                   {/* h-[600px] overflow-scroll */}
-                  <div className="">
+                  <div className="flex gap-0 md:gap-5 flex-col md:flex-col">
                   {cartItems.length < 1 ? (
                     <p className="text-pd-red pd-p-18">Your cart is empty</p>
                   ) : (
-                    cartItems.length == 1 ? (
+                    cartItems.length == 2 ? (
                       <div className="flex flex-wrap">
-                        <div className="flex flex-col w-full md:w-[57%]">
-                          <div className="flex flex-col justify-center items-center px-6 py-4 w-full rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
-                            <img loading="lazy" src={"images/products/"+cartItems[0].id+".png"} className="w-full aspect-[1.05]"/>
+                        <div className="flex flex-col w-full lg:w-[57%]">
+                          <div className="flex flex-col max-w-[350px] justify-center items-center px-6 py-4 w-full rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
+                            <img loading="lazy" src={"images/products/n"+cartItems[0].id+".png"} className="w-full aspect-[1.05]"/>
                           </div>
                         </div>
-                        <div className="pl-5 w-full md:w-[43%]">
+                        <div className="pl-5 w-full lg:w-[43%]">
                           <div className="flex flex-col">
                             <div className="flex gap-2.5 mt-10 text-2xl font-extrabold text-pd-black">
                               <h3 className="leading-8 pd-h3">{cartItems[0].title}</h3>
-                              <h3 className="flex-1 my-auto pd-h3 text-right leading-[130%]">${cartItems[0].price}</h3>
+                              <h3 className="my-auto pd-h3 text-right leading-[130%]">${cartItems[0].price}</h3>
                             </div>
                             <div className="flex gap-2 mt-2 whitespace-nowrap pd-p font-semibold">
                               <span className="text-pd-mid-gray">Color</span>
                               <span className="text-pd-black">Silver</span>
                             </div>
-                            <div className="flex gap-8 mt-6 w-full whitespace-nowrap">
+                            <div className="flex gap-8 mt-6 w-full whitespace-nowrap break-at-half-lg">
                               <div className="flex gap-10 justify-center items-center px-4 py-3 border border-black border-solid rounded-[52px] text-pd-black">
-                                <button onClick={() => changeQuantity(cartItems[0], -1)} disabled={item.quantity === 1}><Minus /></button>
+                                <button onClick={() => changeQuantity(cartItems[0], -1)} disabled={cartItems[0].quantity === 1}><Minus /></button>
                                 <span className="self-start">{cartItems[0].quantity}</span>
                                 <button onClick={() => changeQuantity(cartItems[0], 1)}><Plus /></button>
                               </div>
@@ -76,17 +76,17 @@ export default function Cart(){
                       </div> 
                     ):(
                       cartItems.map(item => (
-                        <div key={item.id} className="flex justify-between items-center">
-                          <div className="flex flex-col w-[150px]">
-                            <div className="flex flex-col justify-center items-center px-6 py-4 w-full rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
+                        <div key={item.id} className="flex-row-at-half-md flex flex-col sm:flex-row gap-11 items-center">
+                          <div className="flex flex-col w-full with-at-half-md md:w-[150px]">
+                            <div className="flex flex-col w-full with-at-half-md md:w-[150px] justify-center items-center px-6 py-4 rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
                               <img loading="lazy" src={"images/products/n"+item.id+".png"} className="w-full aspect-[1.05]"/>
                             </div>
                           </div>
-                          <div className="pl-5 w-[43%]">
+                          <div className="w-full with-at-half-md lg:w-[43%]">
                             <div className="flex flex-col">
                               <div className="flex gap-2.5 mt-10 text-2xl font-extrabold text-pd-black">
                                 <h3 className="leading-8 pd-h3">{item.title}</h3>
-                                <h3 className="flex-1 my-auto pd-h3 text-right leading-[130%]">${item.price}</h3>
+                                <h3 className="my-auto pd-h3 text-right leading-[130%]">${item.price}</h3>
                               </div>
                               <div className="flex gap-2 mt-2 whitespace-nowrap pd-p font-semibold">
                                 <span className="text-pd-mid-gray">Color</span>
@@ -236,9 +236,9 @@ export default function Cart(){
                 <p>Estimated Delivery by</p>
                 <p className="font-semibold">25 July, 2024</p>
               </div>
-              <div className="flex gap-4 p-4 mt-6 text-gray-400 rounded-sm border border-black border-solid">
-                <input type="text" className="flex-1 border-none outline-none" placeholder="Coupon Code" />
-                <div className="shrink-0 w-6 aspect-square fill-white">
+              <div className="relative px-4 py-2 mt-6 text-gray-400 rounded-sm border border-black border-solid">
+                <input type="text" className="w-full pr-8 border-none outline-none" placeholder="Coupon Code" />
+                <div className="absolute w-6 top-2 right-2 aspect-square fill-white">
                   <button><Trailing /></button>
                 </div>
               </div>

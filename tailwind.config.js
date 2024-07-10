@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import defaultTheme from 'tailwindcss/defaultTheme';
 export default {
   content: [
     "./index.html",
@@ -21,8 +22,8 @@ export default {
       'pd-green': '#AFE638'
     },
     fontFamily: {
-      prompt: ['"Prompt"'],
-      montserrat: ['"Montserrat"']
+      prompt: ['"Prompt"', ...defaultTheme.fontFamily.sans],
+      montserrat: ['"Montserrat"', ...defaultTheme.fontFamily.sans]
     },
     extend: {},
   },
