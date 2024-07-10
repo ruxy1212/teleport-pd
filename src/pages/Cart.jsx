@@ -7,6 +7,7 @@ import Minus from "../components/icons/Minus"
 import Percent from "../components/icons/Percent"
 import Trailing from "../components/icons/Trailing";
 import useLocalStorage from "../hooks/useLocalStorage";
+import Popup from "../components/Popup"
 
 export default function Cart(){
     const InitialCart = [
@@ -27,9 +28,11 @@ export default function Cart(){
             : item
         )
       );
+      showPopup(`Cart updated successfully`);
     };
     const removeItem = (productId) => {
       setCartItems((prev) => prev.filter((item) => item.id !== productId));
+        showPopup(`Item removed from cart`);
     };
     const getTotal = () =>
       cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -49,6 +52,13 @@ export default function Cart(){
       navigate("/checkout", { state: { price: getTotal(), discount: getDiscount(), coupon: couponDiscount  } });
     };
 
+    const showPopup = (message) => {
+        setMessage(message);
+        setTimeout(() => {
+          setMessage(null);
+        }, 5000);
+      };
+ 
     return (
       <WebLayout cartItems={cartItems.length}>
         <div className="max-w-[1200px] mx-auto mt-6 px-4 md:px-6 xl:px-0">
@@ -136,97 +146,6 @@ export default function Cart(){
                       ))
                     )
                   )}
-                    
-                    {/* multi items no break */}
-                    {/* <div className="flex justify-between items-center">
-                      <div className="flex flex-col w-[150px]">
-                        <div className="flex flex-col justify-center items-center px-6 py-4 w-full rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
-                          <img loading="lazy" src="images/Image.png" className="w-full aspect-[1.05]"/>
-                        </div>
-                      </div>
-                      <div className="pl-5 w-[43%]">
-                        <div className="flex flex-col">
-                          <div className="flex gap-2.5 mt-10 text-2xl font-extrabold text-pd-black">
-                            <h3 className="leading-8 pd-h3">Iphone 14 Plus</h3>
-                            <h3 className="flex-1 my-auto pd-h3 text-right leading-[130%]">$225.00</h3>
-                          </div>
-                          <div className="flex gap-2 mt-2 whitespace-nowrap pd-p font-semibold">
-                            <span className="text-pd-mid-gray">Color</span>
-                            <span className="text-pd-black">Silver</span>
-                          </div>
-                          <div className="flex gap-8 mt-6 w-full whitespace-nowrap">
-                            <div className="flex gap-10 justify-center items-center px-4 py-3 border border-black border-solid rounded-[52px] text-pd-black">
-                              <button><Minus /></button>
-                              <span className="self-start">{1}</span>
-                              <button><Plus /></button>
-                            </div>
-                            <div className="my-auto">
-                              <button className="text-pd-red pd-p font-semibold">Remove</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="flex flex-col w-[150px]">
-                        <div className="flex flex-col justify-center items-center px-6 py-4 w-full rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
-                          <img loading="lazy" src="images/Image.png" className="w-full aspect-[1.05]"/>
-                        </div>
-                      </div>
-                      <div className="pl-5 w-[43%]">
-                        <div className="flex flex-col">
-                          <div className="flex gap-2.5 mt-10 text-2xl font-extrabold text-pd-black">
-                            <h3 className="leading-8 pd-h3">Iphone 14 Plus</h3>
-                            <h3 className="flex-1 my-auto pd-h3 text-right leading-[130%]">$225.00</h3>
-                          </div>
-                          <div className="flex gap-2 mt-2 whitespace-nowrap pd-p font-semibold">
-                            <span className="text-pd-mid-gray">Color</span>
-                            <span className="text-pd-black">Silver</span>
-                          </div>
-                          <div className="flex gap-8 mt-6 w-full whitespace-nowrap">
-                            <div className="flex gap-10 justify-center items-center px-4 py-3 border border-black border-solid rounded-[52px] text-pd-black">
-                              <button><Minus /></button>
-                              <span className="self-start">{1}</span>
-                              <button><Plus /></button>
-                            </div>
-                            <div className="my-auto">
-                              <button className="text-pd-red pd-p font-semibold">Remove</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="flex flex-col w-[150px]">
-                        <div className="flex flex-col justify-center items-center px-6 py-4 w-full rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
-                          <img loading="lazy" src="images/Image.png" className="w-full aspect-[1.05]"/>
-                        </div>
-                      </div>
-                      <div className="pl-5 w-[43%]">
-                        <div className="flex flex-col">
-                          <div className="flex gap-2.5 mt-10 text-2xl font-extrabold text-pd-black">
-                            <h3 className="leading-8 pd-h3">Iphone 14 Plus</h3>
-                            <h3 className="flex-1 my-auto pd-h3 text-right leading-[130%]">$225.00</h3>
-                          </div>
-                          <div className="flex gap-2 mt-2 whitespace-nowrap pd-p font-semibold">
-                            <span className="text-pd-mid-gray">Color</span>
-                            <span className="text-pd-black">Silver</span>
-                          </div>
-                          <div className="flex gap-8 mt-6 w-full whitespace-nowrap">
-                            <div className="flex gap-10 justify-center items-center px-4 py-3 border border-black border-solid rounded-[52px] text-pd-black">
-                              <button><Minus /></button>
-                              <span className="self-start">{1}</span>
-                              <button><Plus /></button>
-                            </div>
-                            <div className="my-auto">
-                              <button className="text-pd-red pd-p font-semibold">Remove</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>  */}
-
-
                   </div>     
                   <div className="flex gap-3 p-5 mt-6 text-base leading-6 rounded border border-pd-red border-solid bg-pd-red bg-opacity-10 text-pd-black font-montserrat max-md:flex-wrap">
                     <Percent />
@@ -280,6 +199,7 @@ export default function Cart(){
             </div>
           </div>
         </div>
+        {message && <Popup message={message} duration={5000} onClose={() => setMessage(null)} />}
       </div>
      </WebLayout>
       );
