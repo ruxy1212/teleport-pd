@@ -67,7 +67,7 @@ export default function WebLayout({children, cartItems = null}){
             <footer className="max-w-[1200px] mx-auto px-4 md:px-6 xl:px-0 py-14 flex justify-between gap-6 lg:gap-12 flex-wrap lg:flex-nowrap">
                 <div className="flex flex-col justify-between max-w-96 gap-2 md:gap-6 lg:gap-12">
                     <Logo />
-                    <p className="font-normal pd-p py-1">Shop the latest models from top brands at unbeatable prices. Limited time offer - don't miss out!</p>
+                    <p className="font-normal pd-p py-1">Shop the latest models from top brands at unbeatable prices. Limited time offer - don&apos;t miss out!</p>
                 </div>
                 <div className="flex justify-between gap-3 md:gap-6 lg:gap-16 flex-wrap md:flex-nowrap">
                     <div className="flex flex-col gap-0 md:gap-3 w-full">
