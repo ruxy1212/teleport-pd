@@ -27,15 +27,15 @@ export default function Home() {
     ];
 
     const new_products = [
-        {id:1, img:'Image.png', title:'Iphone 14 Plus', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
-        {id:2, img:'Image2.png', title:'Samsung Galaxy Flip 3', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
-        {id:3, img:'Image2.png', title:'Samsung Galaxy Flip 5', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
-        {id:4, img:'Image2.png', title:'Ipad Mini 6', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
-        {id:5, img:'Image2.png', title:'Iphone 12 Pro', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
-        {id:6, img:'Image2.png', title:'Iphone XR', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
-        {id:7, img:'Image2.png', title:'Iphone 8 Plus', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
-        {id:8, img:'Image2.png', title:'Iphone 13 Series', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
-        {id:9, img:'Image2.png', title:'Samsung Galaxy Tab S8', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '8'},
+        {id:1, img:'Image.png', title:'Iphone 14 Plus', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '0'},
+        {id:2, img:'Image2.png', title:'Samsung Galaxy Flip 3', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '0'},
+        {id:3, img:'Image2.png', title:'Samsung Galaxy Flip 5', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '0'},
+        {id:4, img:'Image2.png', title:'Ipad Mini 6', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '0'},
+        {id:5, img:'Image2.png', title:'Iphone 12 Pro', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '0'},
+        {id:6, img:'Image2.png', title:'Iphone XR', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '0'},
+        {id:7, img:'Image2.png', title:'Iphone 8 Plus', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '0'},
+        {id:8, img:'Image2.png', title:'Iphone 13 Series', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '0'},
+        {id:9, img:'Image2.png', title:'Samsung Galaxy Tab S8', price:'225.00', desc:'Latest smartphones with top-tier cameras, fast processors, and sleek designs.', rating:5, feedbacks:'125', discount: '0'},
     ];
 
     const flash_products = [

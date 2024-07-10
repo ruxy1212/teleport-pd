@@ -19,8 +19,14 @@ export default function Cart(){
         )
       );
     };
+    const removeItem = (productId) => {
+      setCartItems((prev) => prev.filter((item) => item.id !== productId));
+    };
     const getTotal = () =>
       cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    const getDiscount = () => 
+      cartItems.reduce((totalDiscount, item) => totalDiscount + (item.discount * item.quantity), 0);
+
     return (
       <WebLayout cartItems={cartItems.length}>
         <div className="max-w-[1200px] mx-auto mt-6 px-4 md:px-6 xl:px-0">
@@ -42,9 +48,9 @@ export default function Cart(){
                   {/* h-[600px] overflow-scroll */}
                   <div className="flex gap-0 md:gap-5 flex-col md:flex-col">
                   {cartItems.length < 1 ? (
-                    <p className="text-pd-red pd-p-18">Your cart is empty</p>
+                    <p className="text-pd-red pd-p-18 h-[300px] flex justify-center items-center">Your cart is empty</p>
                   ) : (
-                    cartItems.length == 2 ? (
+                    cartItems.length == 1 ? (
                       <div className="flex flex-wrap">
                         <div className="flex flex-col w-full lg:w-[57%]">
                           <div className="flex flex-col max-w-[350px] justify-center items-center px-6 py-4 w-full rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
@@ -68,7 +74,7 @@ export default function Cart(){
                                 <button onClick={() => changeQuantity(cartItems[0], 1)}><Plus /></button>
                               </div>
                               <div className="my-auto">
-                                <button className="text-pd-red pd-p font-semibold">Remove</button>
+                                <button className="text-pd-red pd-p font-semibold" onClick={()=>removeItem(cartItems[0].id)}>Remove</button>
                               </div>
                             </div>
                           </div>
@@ -76,7 +82,7 @@ export default function Cart(){
                       </div> 
                     ):(
                       cartItems.map(item => (
-                        <div key={item.id} className="flex-row-at-half-md flex flex-col sm:flex-row gap-11 items-center">
+                        <div key={item.id} className="flex-row-at-half-md flex flex-col sm:flex-row gap-11 items-center">{console.log(item.discount)}
                           <div className="flex flex-col w-full with-at-half-md md:w-[150px]">
                             <div className="flex flex-col w-full with-at-half-md md:w-[150px] justify-center items-center px-6 py-4 rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
                               <img loading="lazy" src={"images/products/n"+item.id+".png"} className="w-full aspect-[1.05]"/>
@@ -95,11 +101,11 @@ export default function Cart(){
                               <div className="flex gap-8 mt-6 w-full whitespace-nowrap">
                                 <div className="flex gap-10 justify-center items-center px-4 py-3 border border-black border-solid rounded-[52px] text-pd-black">
                                   <button onClick={() => changeQuantity(item, -1)} disabled={item.quantity === 1}><Minus /></button>
-                                  <span className="self-start">{cartItems[0].quantity}</span>
+                                  <span className="self-start">{item.quantity}</span>
                                   <button onClick={() => changeQuantity(item, 1)}><Plus /></button>
                                 </div>
                                 <div className="my-auto">
-                                  <button className="text-pd-red pd-p font-semibold">Remove</button>
+                                  <button onClick={()=>removeItem(item.id)} className="text-pd-red pd-p font-semibold">Remove</button>
                                 </div>
                               </div>
                             </div>
@@ -213,11 +219,11 @@ export default function Cart(){
               <h3 className="pd-h3 font-extrabold leading-8 text-pd-black">Order Summary</h3>
               <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-indigo-950">
                 <p>Price</p>
-                <p>$319.98</p>
+                <p>${getTotal()}</p>
               </div>
               <div className="flex gap-5 justify-between mt-6 whitespace-nowrap text-indigo-950">
                 <p>Discount</p>
-                <p>$31.90</p>
+                <p>${getDiscount()}</p>
               </div>
               <div className="flex gap-5 justify-between mt-6 whitespace-nowrap">
                 <p className="text-indigo-950">Shipping</p>
@@ -230,7 +236,8 @@ export default function Cart(){
               <div className="shrink-0 mt-8 h-px bg-pd-mid-gray" />
               <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-indigo-950">
                 <p>TOTAL</p>
-                <p className="font-semibold text-right">$288.08</p>
+                <p className="font-semibold text-right">${getTotal()-getDiscount()}</p>
+                {/* $288.08 */}
               </div>
               <div className="flex gap-5 justify-between mt-6 text-indigo-950">
                 <p>Estimated Delivery by</p>
