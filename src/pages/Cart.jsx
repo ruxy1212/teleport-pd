@@ -246,14 +246,14 @@ export default function Cart(){
               <div className="flex gap-5 justify-between mt-6 text-indigo-950">
                 <p>Coupon Applied</p>
                 <div className="flex flex-col items-end">
-                  <p>$0.00</p>
+                  <p>${(couponDiscount/100*(getTotal()-getDiscount()))}</p>
                   {couponDiscount > 0 && <p className="text-xs font-montserrat text-pd-red">-{couponDiscount}%</p>}
                 </div>
               </div>
               <div className="shrink-0 mt-8 h-px bg-pd-mid-gray" />
               <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-indigo-950">
                 <p>TOTAL</p>
-                <p className="font-semibold text-right">${getTotal()-getDiscount()}</p>
+                <p className="font-semibold text-right">${(getTotal()-getDiscount())-(couponDiscount/100*(getTotal()-getDiscount()))}</p>
                 {/* $288.08 */}
               </div>
               <div className="flex gap-5 justify-between mt-6 text-indigo-950">
@@ -265,8 +265,8 @@ export default function Cart(){
                 <div className="absolute w-6 top-2 right-2 aspect-square fill-white">
                   <button onClick={applyCoupon}><Trailing /></button>
                 </div>
-                <p className={`${couponFeedback === "Coupon applied successfully!" ? "text-pd-green" : "text-pd-red"}`}>{couponFeedback}</p>
               </div>
+              <p className={`${couponFeedback === "Coupon applied successfully!" ? "text-pd-green" : "text-pd-red"}`}>{couponFeedback}</p>
               <div className="mt-6">
                 <Link to="/checkout" className="mx-auto py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Proceed to Checkout</Link>
               </div>
