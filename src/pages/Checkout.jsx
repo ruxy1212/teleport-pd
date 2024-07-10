@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import WebLayout from "../layouts/WebLayout";
 import { Link, useLocation } from "react-router-dom";
+import { getNextWeekFriday } from '../hooks/nextWeekFriday';
 import ChevronRight from "../components/icons/ChevronRight";
 import Plus from "../components/icons/Plus"
-// import Minus from "../components/icons/Minus"
-// import Percent from "../components/icons/Percent"
 import Trailing from "../components/icons/Trailing";
 import amex from "../assets/img/icons/amex.svg";
 import discover from "../assets/img/icons/discover.svg";
@@ -14,13 +13,28 @@ import ShowSuccess from "../components/parts/ShowSuccess";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function Checkout(){
-    const [showPayment, setShowPayment] = useState(false);
-    const [showSuccess, setShowSuccess] = useState(false);
-    const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
     const location = useLocation();
     const { price } = location.state || { price: 0 };
     const { discount } = location.state || { discount: 0 };
     const { coupon } = location.state || { coupon: 0 };
+    const [showPayment, setShowPayment] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
+    const validCoupons = {"DISCOUNT10": 10, "SALE20": 20, "PROMO30": 30, "EREGE": 50, "RUXY": 50};
+    const [couponCode, setCoupon] = useState("");
+    const [couponFeedback, setCouponFeedback] = useState("");
+    const [couponDiscount, setCouponDiscount] = useState(coupon);
+    const deliveryDate = getNextWeekFriday();
+
+    const applyCoupon = () => {
+      if (validCoupons[couponCode.toUpperCase()]) {
+        setCouponDiscount(validCoupons[couponCode.toUpperCase()]);
+        setCouponFeedback("Coupon applied successfully!");
+      } else {
+        setCouponFeedback("Invalid or expired coupon code.");
+        setCouponDiscount(0);
+      }
+    };
 
     const setOpen = () => {
       setShowPayment(false);
@@ -112,25 +126,26 @@ export default function Checkout(){
               <div className="flex gap-5 justify-between mt-6 text-pd-black">
                 <p>Coupon Applied</p>
                 <div className="flex flex-col items-end">
-                  <p>${(coupon/100*(price()-discount()))}</p>
-                  {coupon > 0 && <p className="text-xs font-montserrat text-pd-red">-{coupon}%</p>}
+                  <p>${(couponDiscount/100*(price-discount))}</p>
+                  {couponDiscount > 0 && <p className="text-xs font-montserrat text-pd-red">-{couponDiscount}%</p>}
                 </div>
               </div>
               <div className="shrink-0 mt-8 h-px bg-pd-mid-gray" />
               <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-pd-black">
                 <p>TOTAL</p>
-                <p className="font-semibold text-right">${(price-discount)-(coupon/100*(price-discount))}</p>
+                <p className="font-semibold text-right">${(price-discount)-(couponDiscount/100*(price-discount))}</p>
               </div>
               <div className="flex gap-5 justify-between mt-6 text-pd-black">
                 <p>Estimated Delivery by</p>
                 <p className="font-semibold">25 July, 2024</p>
               </div>
               <div className="relative px-4 py-2 mt-6 text-gray-400 rounded-sm border border-black border-solid">
-                <input type="text" className="w-full pr-8 border-none outline-none" placeholder="Coupon Code" />
+                <input type="text" className="w-full pr-8 border-none outline-none" placeholder="Coupon Code" value={couponCode} onChange={(e) => setCoupon(e.target.value)}/>
                 <div className="absolute w-6 top-2 right-2 aspect-square fill-white">
-                  <button><Trailing /></button>
+                  <button onClick={applyCoupon}><Trailing /></button>
                 </div>
               </div>
+              <p className={`${couponFeedback === "Coupon applied successfully!" ? "text-pd-green" : "text-pd-red"}`}>{couponFeedback}</p>
               <div className="mt-6">
                 <button onClick={()=>setShowSuccess(true)} className="mx-auto py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Place Your Order and Pay</button>
               </div>
