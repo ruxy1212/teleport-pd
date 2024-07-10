@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import WebLayout from "../layouts/WebLayout";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ChevronRight from "../components/icons/ChevronRight";
 import Plus from "../components/icons/Plus"
 // import Minus from "../components/icons/Minus"
@@ -17,6 +17,10 @@ export default function Checkout(){
     const [showPayment, setShowPayment] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [cartItems, setCartItems] = useLocalStorage("cartItems", []);
+    const location = useLocation();
+    const { price } = location.state || { price: 0 };
+    const { discount } = location.state || { discount: 0 };
+    const { coupon } = location.state || { coupon: 0 };
 
     const setOpen = () => {
       setShowPayment(false);
@@ -53,7 +57,7 @@ export default function Checkout(){
                         </div>
                       </div>
                       <img loading="lazy" src={amex} className="shrink-0 my-auto w-6 aspect-[1.41]"/>
-                      <div className="pd-p font-semibold leading-6 text-indigo-950"> •••• 6754</div>
+                      <div className="pd-p font-semibold leading-6 text-pd-black"> •••• 6754</div>
                     </div>
                     <div className="pd-p leading-6 text-gray-400">Expires 06/2027</div>
                   </div>
@@ -71,7 +75,7 @@ export default function Checkout(){
                         </div>
                       </div>
                       <img loading="lazy" src={discover} className="shrink-0 my-auto w-6 aspect-[1.41]"/>
-                      <div className="pd-p font-semibold leading-6 text-indigo-950"> •••• 3754</div>
+                      <div className="pd-p font-semibold leading-6 text-pd-black"> •••• 3754</div>
                     </div>
                     <div className="pd-p leading-6 text-gray-400">Expires 06/2025</div>
                   </div>
@@ -93,28 +97,31 @@ export default function Checkout(){
             <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
               <div className="flex flex-col self-stretch p-8 m-auto w-full pd-p font-montserrat leading-6 bg-white rounded-xl border border-black border-solid max-md:px-5 max-md:mt-10">
               <h3 className="pd-h3 font-extrabold leading-8 text-pd-black">Order Summary</h3>
-              <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-indigo-950">
+              <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-pd-black">
                 <p>Price</p>
-                <p>$319.98</p>
+                <p>${price}</p>
               </div>
-              <div className="flex gap-5 justify-between mt-6 whitespace-nowrap text-indigo-950">
+              <div className="flex gap-5 justify-between mt-6 whitespace-nowrap text-pd-black">
                 <p>Discount</p>
-                <p>$31.90</p>
+                <p>${discount}</p>
               </div>
               <div className="flex gap-5 justify-between mt-6 whitespace-nowrap">
-                <p className="text-indigo-950">Shipping</p>
+                <p className="text-pd-black">Shipping</p>
                 <p className="text-pd-red">Free</p>
               </div>
-              <div className="flex gap-5 justify-between mt-6 text-indigo-950">
+              <div className="flex gap-5 justify-between mt-6 text-pd-black">
                 <p>Coupon Applied</p>
-                <p>$0.00</p>
+                <div className="flex flex-col items-end">
+                  <p>${(coupon/100*(price()-discount()))}</p>
+                  {coupon > 0 && <p className="text-xs font-montserrat text-pd-red">-{coupon}%</p>}
+                </div>
               </div>
               <div className="shrink-0 mt-8 h-px bg-pd-mid-gray" />
-              <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-indigo-950">
+              <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-pd-black">
                 <p>TOTAL</p>
-                <p className="font-semibold text-right">$288.08</p>
+                <p className="font-semibold text-right">${(price-discount)-(coupon/100*(price-discount))}</p>
               </div>
-              <div className="flex gap-5 justify-between mt-6 text-indigo-950">
+              <div className="flex gap-5 justify-between mt-6 text-pd-black">
                 <p>Estimated Delivery by</p>
                 <p className="font-semibold">25 July, 2024</p>
               </div>

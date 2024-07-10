@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import WebLayout from "../layouts/WebLayout";
 import ChevronRight from "../components/icons/ChevronRight";
@@ -13,7 +13,8 @@ export default function Cart(){
     const validCoupons = {"DISCOUNT10": 10, "SALE20": 20, "PROMO30": 30, "EREGE": 50, "RUXY": 50};
     const [coupon, setCoupon] = useState("");
     const [couponFeedback, setCouponFeedback] = useState("");
-    const [couponDiscount, setCouponDiscount] = useState(0);  
+    const [couponDiscount, setCouponDiscount] = useState(0);
+    const navigate = useNavigate();  
 
     const changeQuantity = (product, step) => {
       setCartItems((prev) =>
@@ -39,6 +40,10 @@ export default function Cart(){
         setCouponFeedback("Invalid or expired coupon code.");
         setCouponDiscount(0);
       }
+    };
+
+    const proceedToPayment = () => {
+      navigate("/checkout", { state: { price: getTotal(), discount: getDiscount(), coupon: couponDiscount  } });
     };
 
     return (
@@ -231,19 +236,19 @@ export default function Cart(){
             <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
               <div className="flex flex-col self-stretch p-8 m-auto w-full pd-p font-montserrat leading-6 bg-white rounded-xl border border-black border-solid max-md:px-5 max-md:mt-10">
               <h3 className="pd-h3 font-extrabold leading-8 text-pd-black">Order Summary</h3>
-              <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-indigo-950">
+              <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-pd-black">
                 <p>Price</p>
                 <p>${getTotal()}</p>
               </div>
-              <div className="flex gap-5 justify-between mt-6 whitespace-nowrap text-indigo-950">
+              <div className="flex gap-5 justify-between mt-6 whitespace-nowrap text-pd-black">
                 <p>Discount</p>
                 <p>${getDiscount()}</p>
               </div>
               <div className="flex gap-5 justify-between mt-6 whitespace-nowrap">
-                <p className="text-indigo-950">Shipping</p>
+                <p className="text-pd-black">Shipping</p>
                 <p className="text-pd-red">Free</p>
               </div>
-              <div className="flex gap-5 justify-between mt-6 text-indigo-950">
+              <div className="flex gap-5 justify-between mt-6 text-pd-black">
                 <p>Coupon Applied</p>
                 <div className="flex flex-col items-end">
                   <p>${(couponDiscount/100*(getTotal()-getDiscount()))}</p>
@@ -251,12 +256,12 @@ export default function Cart(){
                 </div>
               </div>
               <div className="shrink-0 mt-8 h-px bg-pd-mid-gray" />
-              <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-indigo-950">
+              <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-pd-black">
                 <p>TOTAL</p>
                 <p className="font-semibold text-right">${(getTotal()-getDiscount())-(couponDiscount/100*(getTotal()-getDiscount()))}</p>
                 {/* $288.08 */}
               </div>
-              <div className="flex gap-5 justify-between mt-6 text-indigo-950">
+              <div className="flex gap-5 justify-between mt-6 text-pd-black">
                 <p>Estimated Delivery by</p>
                 <p className="font-semibold">25 July, 2024</p>
               </div>
@@ -268,7 +273,7 @@ export default function Cart(){
               </div>
               <p className={`${couponFeedback === "Coupon applied successfully!" ? "text-pd-green" : "text-pd-red"}`}>{couponFeedback}</p>
               <div className="mt-6">
-                <Link to="/checkout" className="mx-auto py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Proceed to Checkout</Link>
+                <button onClick={proceedToPayment} className="mx-auto py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Proceed to Checkout</button>
               </div>
             </div>
           </div>
