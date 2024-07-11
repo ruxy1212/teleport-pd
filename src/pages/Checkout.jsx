@@ -4,7 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 // import { getNextWeekFriday } from '../hooks/nextWeekFriday';
 import ChevronRight from "../components/icons/ChevronRight";
 import Plus from "../components/icons/Plus"
-import Trailing from "../components/icons/Trailing";
 import amex from "../assets/img/icons/amex.svg";
 import discover from "../assets/img/icons/discover.svg";
 import mastercard from "../assets/img/icons/mastercard.svg";
@@ -15,6 +14,7 @@ import AddPayment from "../components/parts/AddPayment";
 import ShowSuccess from "../components/parts/ShowSuccess";
 import useLocalStorage from "../hooks/useLocalStorage";
 import Popup from "../components/Popup"
+import OrderSummary from '../components/OrderSummary';
 
 export default function Checkout(){
     const initialCards = [
@@ -25,13 +25,11 @@ export default function Checkout(){
     const { price } = location.state || { price: 0 };
     const { discount } = location.state || { discount: 0 };
     const { coupon } = location.state || { coupon: 0 };
+    const { couponMsg } = location.state || { couponMsg: '' };
     const [showPayment, setShowPayment] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const cartItems = useLocalStorage("cartItems", []);
-    const validCoupons = {"DISCOUNT10": 10, "SALE20": 20, "PROMO30": 30, "EREGE": 50, "RUXY": 50};
-    const [couponCode, setCoupon] = useState("");
-    const [couponFeedback, setCouponFeedback] = useState("");
-    const [couponDiscount, setCouponDiscount] = useState(coupon);
+    const couponCode = couponMsg;
     const [message, setMessage] = useState(null);
     // const deliveryDate = getNextWeekFriday();
 
@@ -40,16 +38,6 @@ export default function Checkout(){
     const addCard = (newCard) => {
       setCards([...cards, newCard]);
       showPopup(`Payment card added successfully`);
-    };
-
-    const applyCoupon = () => {
-      if (validCoupons[couponCode.toUpperCase()]) {
-        setCouponDiscount(validCoupons[couponCode.toUpperCase()]);
-        setCouponFeedback("Coupon applied successfully!");
-      } else {
-        setCouponFeedback("Invalid or expired coupon code.");
-        setCouponDiscount(0);
-      }
     };
 
     const setOpen = () => {
@@ -77,7 +65,7 @@ export default function Checkout(){
           <Modal open={showSuccess} setOpen={setOpen}>
             <ShowSuccess></ShowSuccess>
           </Modal>
-        <div className="max-w-[1200px] mx-auto mt-6 px-4 md:px-6 xl:px-0">
+        <div className="max-w-[1200px] mx-auto pt-6 px-4 md:px-6 xl:px-0">
           <div className="flex gap-5 flex-col md:flex-row">
             <div className="flex flex-col grow w-full md:w-[67%] gap-8">
               <div>
@@ -89,7 +77,6 @@ export default function Checkout(){
                 <div className="mt-16 pd-h3 font-semibold leading-8 text-pd-black">Payment Method</div>
               </div>
               <div className="flex flex-col justify-between py-2 mt-6 rounded border border-black border-solid max-md:max-w-full">
-{/* starts here */}
                 {
                   cards.length < 1 ? (
                     <p className="text-pd-red pd-p-18 h-[50px] flex justify-center items-center">You have not added any cards yet</p>
@@ -120,60 +107,13 @@ export default function Checkout(){
                   )
                 }
               </div>
-
               <hr className="shrink-0 mt-0 md:mt-8 h-0 border-t border-pd-black border-solid max-md:max-w-full" />
-
               <button className="flex gap-4 justify-center self-start mt-0 md:mt-8 font-semibold leading-6 rounded font-montserrat" onClick={()=>setShowPayment(true)}>
                 <Plus />
                 <span>Add Payment method</span>
               </button>
-
-
             </div>    
-            {/* new component */}
-            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col self-stretch p-8 m-auto w-full pd-p font-montserrat leading-6 bg-white rounded-xl border border-black border-solid max-md:px-5 max-md:mt-10">
-              <h3 className="pd-h3 font-extrabold leading-8 text-pd-black">Order Summary</h3>
-              <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-pd-black">
-                <p>Price</p>
-                <p>${price}</p>
-              </div>
-              <div className="flex gap-5 justify-between mt-6 whitespace-nowrap text-pd-black">
-                <p>Discount</p>
-                <p>${discount}</p>
-              </div>
-              <div className="flex gap-5 justify-between mt-6 whitespace-nowrap">
-                <p className="text-pd-black">Shipping</p>
-                <p className="text-pd-red">Free</p>
-              </div>
-              <div className="flex gap-5 justify-between mt-6 text-pd-black">
-                <p>Coupon Applied</p>
-                <div className="flex flex-col items-end">
-                  <p>${(couponDiscount/100*(price-discount))}</p>
-                  {couponDiscount > 0 && <p className="text-xs font-montserrat text-pd-red">-{couponDiscount}%</p>}
-                </div>
-              </div>
-              <div className="shrink-0 mt-8 h-px bg-pd-mid-gray" />
-              <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-pd-black">
-                <p>TOTAL</p>
-                <p className="font-semibold text-right">${(price-discount)-(couponDiscount/100*(price-discount))}</p>
-              </div>
-              <div className="flex gap-5 justify-between mt-6 text-pd-black">
-                <p>Estimated Delivery by</p>
-                <p className="font-semibold">25 July, 2024</p>
-              </div>
-              <div className="relative px-4 py-2 mt-6 text-gray-400 rounded-sm border border-black border-solid">
-                <input type="text" className="w-full pr-8 border-none outline-none" placeholder="Coupon Code" value={couponCode} onChange={(e) => setCoupon(e.target.value)}/>
-                <div className="absolute w-6 top-2 right-2 aspect-square fill-white">
-                  <button onClick={applyCoupon}><Trailing /></button>
-                </div>
-              </div>
-              <p className={`${couponFeedback === "Coupon applied successfully!" ? "text-pd-green" : "text-pd-red"}`}>{couponFeedback}</p>
-              <div className="mt-6">
-                <button onClick={()=>setShowSuccess(true)} className="w-full py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Place Your Order and Pay</button>
-              </div>
-            </div>
-          </div>
+            <OrderSummary total={price} discount={discount} proceed_loc="success" proceed_msg="Place Your Order and Pay" coupon={coupon} couponMsg={couponCode} showModal={setShowSuccess} />
         </div>
         {message && <Popup message={message} duration={5000} onClose={() => setMessage(null)} />}
       </div>

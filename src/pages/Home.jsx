@@ -10,12 +10,12 @@ import camera from "../assets/img/icons/camera.svg"
 import gaming from "../assets/img/icons/gaming.svg"
 import mobile from "../assets/img/icons/mobile.svg"
 import tv from "../assets/img/icons/tv.svg"
-import ProdFavorite from "../components/icons/ProdFavorite"
-import Cart from "../components/icons/Cart"
-import Rating from "../components/Rating"
 import ProdSwitch from "../components/icons/ProdSwitch"
 import useLocalStorage from "../hooks/useLocalStorage";
 import Popup from "../components/Popup"
+import Category from "../components/Category"
+import ProductCard from "../components/ProductCard"
+import FlashProduct from "../components/FlashProduct"
 
 export default function Home() {
     const p_categories = [
@@ -104,7 +104,7 @@ export default function Home() {
     return(
         <WebLayout cartItems={cartItems.length}>
             <section className="bg-pd-gray">
-                <div className="max-w-[1200px] mx-auto px-4 md:px-6 xl:px-0 flex justify-center gap-16 self-stretch">
+                <div className="max-w-[1200px] pt-4 mx-auto px-4 md:px-6 xl:px-0 flex justify-center gap-16 self-stretch">
                     <div className="flex gap-16 justify-end md:gap-5 max-md:flex-col">
                         <div className="flex flex-col w-[48%] max-md:ml-0 max-md:w-full">
                             <div className="flex flex-col self-stretch pt-4 my-auto max-md:mt-10 max-md:max-w-full">
@@ -117,14 +117,14 @@ export default function Home() {
                                             <img loading="lazy" src={hero_small} className="shrink-0 w-28 max-w-full aspect-square max-md:mt-7"/>
                                         </div>
                                         <h3 className="text-pd-black font-prompt pd-h3 font-semibold">iPhone 14 Edition</h3>
-                                        <div className="flex flex-col ml-5 w-[77%] max-md:ml-0 max-md:w-full">
+                                        <div className="flex-col ml-5 w-[77%] max-md:ml-0 max-md:w-full hidden md:flex">
                                             <div className="self-stretch my-auto text-3xl font-semibold leading-10  max-md:mt-10"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="relative flex flex-col ml-5 w-[34%] max-md:ml-0 max-md:w-full">
+                        <div className="relative flex flex-col ml-5 w-[34%] max-md:ml-0 max-md:w-full pb-10">
                             <div className="">
                                 <img loading="lazy" src={abs_image} className="z-10 absolute bottom-16 right-4 md:-left-20 lg:-left-28 shrink-0 w-[189px]"/>
                             </div>
@@ -141,12 +141,7 @@ export default function Home() {
                     <div className="flex justify-between items-center mt-12 leading-6 text-center text-pd-black flex-wrap">
                         {
                             p_categories.map(category => (
-                                <div key={category[1]} className="flex justify-center py-px leading-6 w-1/3 md:w-[14.28%]">
-                                    <div className="flex flex-col max-w-28">
-                                        <img loading="lazy" src={category[0]} className="self-center aspect-square w-[85px]" />
-                                        <div className="mt-4">{category[1]}</div>
-                                    </div>
-                                </div>
+                                <Category key={category[1]} elem={category} />
                             ))
                         }
                     </div>
@@ -168,35 +163,7 @@ export default function Home() {
                     <div className="max-w-[1200px] mx-auto px-4 md:px-6 xl:px-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         {
                             product_items.map(product => (
-                                <div key={product.id} className="flex flex-col">
-                                    <div className="flex flex-col px-6 py-4 w-full rounded-2xl shadow-lg border border-pd-white backdrop-blur-sm">
-                                        <div className="flex flex-col justify-center items-end py-2.5">
-                                            <button style={{ color: likedProducts.includes(product.id) ? "red" : "black" }} onClick={() => handleLike(product)}><ProdFavorite/></button>
-                                        </div>
-                                        <div className="flex flex-col justify-center px-7 mt-2">
-                                            <img loading="lazy" src={"images/products/n"+product.id+".png"} className="w-full" />
-                                        </div>
-                                    </div>
-                                    <div className="flex gap-5 px-5 mt-10 text-2xl font-extrabold text-pd-black">
-                                        <h3 className="leading-8 pd-h3">{product.title}</h3>
-                                        <h3 className="flex-1 my-auto pd-h3 text-right leading-[130%]">${product.price}</h3>
-                                    </div>
-                                    <p className="mt-6 leading-6 text-pd-black pd-p">{product.desc}</p>
-                                    <div className="flex gap-2.5 self-start pr-5 mt-4">
-                                        <div className="flex gap-0.5 my-auto">
-                                            <Rating amount={product.rating}/>
-                                        </div>
-                                        <div className="leading-7 text-black">
-                                            (<span className="pd-p">{product.feedbacks}</span>)
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <button className="flex gap-2.5 justify-center px-9 py-4 mt-5 text-base font-medium leading-5 text-black border border-black border-solid rounded-[52px]"  onClick={() => addToCart(product)}>
-                                            <Cart />
-                                            <p>Add to Cart</p>
-                                        </button> 
-                                    </div>
-                                </div>
+                                <ProductCard key={product.id} product={product} likedProducts={likedProducts} handleLike={handleLike} addToCart={addToCart} />
                             ))
                         }
                     </div>
@@ -212,38 +179,7 @@ export default function Home() {
                     <div className="max-w-[1200px] mx-auto px-4 md:px-6 xl:px-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         {
                             flash_products.map(product => (
-                                <div key={product.id} className="flex flex-col">
-                                    <div className="flex flex-col px-8 py-4 w-full rounded-2xl shadow-lg border border-pd-white backdrop-blur-sm aspect-square leading-[120%]">
-                                        <div className="relative flex flex-col justify-center mt-2">
-                                            <div className="flex justify-end">
-                                                <span className="flex justify-center items-center h-[60px] w-[135px] bg-[url('/images/callout.svg')] pd-p-18 font-bold relative bottom-[-23px] right-[-23px]">{product.discount}% Off</span>
-                                            </div>
-                                            <img loading="lazy" src={"images/products/n"+product.id+".png"} className="w-full" />
-                                            <div className="flex gap-3 self-center mt-4">
-                                                <h3 className="text-[26px] font-montserrat font-bold text-pd-blue">${product.price}</h3>
-                                                <div className="my-auto text-sm font-medium font-montserrat text-pd-mid-gray line-through">IDR 150.00</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="flex gap-5 px-5 mt-10 text-2xl font-extrabold text-pd-black">
-                                        <h3 className="leading-8 pd-h3">{product.title}</h3>
-                                    </div>
-                                    <p className="mt-6 leading-6 text-pd-black pd-p">{product.desc}</p>
-                                    <div className="flex gap-2.5 self-start pr-5 mt-4">
-                                        <div className="flex gap-0.5 my-auto">
-                                            <Rating amount={product.rating}/>
-                                        </div>
-                                        <div className="leading-7 text-black">
-                                            (<span className="pd-p">{product.feedbacks}</span>)
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <button className="flex gap-2.5 justify-center px-9 py-4 mt-5 text-base font-medium leading-5 text-black border border-black border-solid rounded-[52px]" onClick={() => addToCart(product)}>
-                                            <Cart />
-                                            <p>Add to Cart</p>
-                                        </button> 
-                                    </div>
-                                </div>
+                                <FlashProduct key={product.id} product={product} addToCart={addToCart} />
                             ))
                         }
                     </div>
