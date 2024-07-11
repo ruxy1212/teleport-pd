@@ -104,7 +104,7 @@ export default function Home() {
     return(
         <WebLayout cartItems={cartItems.length}>
             <section className="bg-pd-gray">
-                <div className="max-w-[1200px] mx-auto px-4 md:px-6 xl:px-0 flex justify-center gap-16 self-stretch">
+                <div className="max-w-[1200px] pt-4 mx-auto px-4 md:px-6 xl:px-0 flex justify-center gap-16 self-stretch">
                     <div className="flex gap-16 justify-end md:gap-5 max-md:flex-col">
                         <div className="flex flex-col w-[48%] max-md:ml-0 max-md:w-full">
                             <div className="flex flex-col self-stretch pt-4 my-auto max-md:mt-10 max-md:max-w-full">

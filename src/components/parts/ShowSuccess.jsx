@@ -8,7 +8,7 @@ export default function ShowSuccess() {
   const [likedProducts, setLikedProducts] = useLocalStorage('likedProducts', []);
   const finalize = () => {
     const updatedLikedProducts = likedProducts.filter(
-      (likedItem) => !cartItems.some((cartItem) => cartItem.id === likedItem.id)
+      (likedItem) => !cartItems.some((cartItem) => cartItem.id === likedItem)
     );
     setLikedProducts(updatedLikedProducts);
     setCartItems([]);

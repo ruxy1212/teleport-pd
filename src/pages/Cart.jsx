@@ -43,7 +43,7 @@ export default function Cart(){
  
     return (
       <WebLayout cartItems={cartItems.length}>
-        <div className="max-w-[1200px] mx-auto mt-6 px-4 md:px-6 xl:px-0">
+        <div className="max-w-[1200px] mx-auto pt-6 px-4 md:px-6 xl:px-0">
           <div className="flex gap-5 flex-col md:flex-row">
             <div className="flex flex-col grow w-full md:w-[67%] gap-8">
               <div>

@@ -3,10 +3,12 @@ import Home from './pages/Home'
 import Checkout from './pages/Checkout'
 import Cart from './pages/Cart'
 import Page404 from "./pages/Page404"
+import ScrollToTop from "./components/ScrollToTop"
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/checkout' element={<Checkout />} />
@@ -14,6 +16,7 @@ export default function App() {
         <Route path='/events' element={<Page404 />} />
         <Route path='/pricing' element={<Page404 />} />
         <Route path='/company' element={<Page404 />} />
+        <Route path='/page404' element={<Page404 />} />
       </Routes>
     </BrowserRouter>
   )

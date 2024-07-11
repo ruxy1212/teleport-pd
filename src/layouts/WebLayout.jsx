@@ -14,33 +14,35 @@ export default function WebLayout({children, cartItems = null}){
     const location = useLocation();
     return (
         <>
-            <nav className="flex fixed shadow-md md:shadow-sm top-0 left-0 w-full z-30 justify-between items-center self-stretch py-2 px-4 md:px-6 xl:px-0 bg-pd-white max-w-[1200px] mx-auto ">
-                <Link to="/" className="logo py-2 w-[144px]  md:w-[213px]" href="#">
-                    <Logo />
-                </Link>
-                <ul className="hidden md:flex gap-0 lg:gap-6">
-                    <li><Link to="/" className="uppercase p-2 lg:p-4 font-semibold">Home</Link></li>
-                    <li><Link to="/pricing" className="uppercase p-2 lg:p-4 font-semibold">Pricing</Link></li>
-                    <li><Link to="/events" className="uppercase p-2 lg:p-4 font-semibold">Events</Link></li>
-                    <li><Link to="/company" className="uppercase p-2 lg:p-4 font-semibold">Company</Link></li>
-                    {/* <a className="p-4 uppercase font-semibold" href="#">Login</a> */}
-                </ul>
-{/*                 
-                {
-                    location.pathname == '/' &&  */}
-                    <div className={`${location.pathname=='/'?'':'invisible p-0'} items-center gap-2 py-2 hidden md:flex`}>
-                        <ShoppingCart text={cartItems}/>
-                        <Link to="/cart" className="py-4 px-9 flex items-center gap-2 bg-pd-black text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat"><span className="hide-at-half-md">Go To </span>Cart<ArrowRight className="h-5 w-5"/></Link>
+            <header className="fixed top-0 left-0 w-full z-30 bg-pd-white">
+                <nav className="flex shadow-md md:shadow-sm w-full justify-between items-center self-stretch py-2 px-4 md:px-6 xl:px-0 bg-pd-white max-w-[1200px] mx-auto">
+                    <Link to="/" className="logo py-2 w-[144px]  md:w-[213px]" href="#">
+                        <Logo />
+                    </Link>
+                    <ul className="hidden md:flex gap-0 lg:gap-6">
+                        <li><Link to="/" className="uppercase p-2 lg:p-4 font-semibold">Home</Link></li>
+                        <li><Link to="/pricing" className="uppercase p-2 lg:p-4 font-semibold">Pricing</Link></li>
+                        <li><Link to="/events" className="uppercase p-2 lg:p-4 font-semibold">Events</Link></li>
+                        <li><Link to="/company" className="uppercase p-2 lg:p-4 font-semibold">Company</Link></li>
+                        {/* <a className="p-4 uppercase font-semibold" href="#">Login</a> */}
+                    </ul>
+    {/*                 
+                    {
+                        location.pathname == '/' &&  */}
+                        <div className={`${location.pathname=='/'?'':'invisible p-0'} items-center gap-2 py-2 hidden md:flex`}>
+                            <ShoppingCart text={cartItems}/>
+                            <Link to="/cart" className="py-4 px-9 flex items-center gap-2 bg-pd-black text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat"><span className="hide-at-half-md">Go To </span>Cart<ArrowRight className="h-5 w-5"/></Link>
+                        </div>
+                    {/* } */}
+                    
+                    <div className="flex items-center gap-2 py-2 md:hidden">
+                        <Link to="/cart"><ShoppingCart text={cartItems}/></Link>
+                        <button className="flex w-12 h-12 justify-end items-center" onClick={()=>setOpen(true)} >
+                            <img src={Menu} alt="" />
+                        </button>
                     </div>
-                {/* } */}
-                
-                <div className="flex items-center gap-2 py-2 md:hidden">
-                    <Link to="/cart"><ShoppingCart text={cartItems}/></Link>
-                    <button className="flex w-12 h-12 justify-end items-center" onClick={()=>setOpen(true)} >
-                        <img src={Menu} alt="" />
-                    </button>
-                </div>
-            </nav>
+                </nav>
+            </header>
             <div className={`${open?'flex':'hidden'} md:hidden fixed top-0 left-0 w-screen h-screen z-40 bg-pd-black/50 justify-end pd-off-canvas`}>
                 <nav className="relative right-0 w-[80%] w-max-[300px] z-40 bg-pd-white rounded-s-3xl py-2 px-4 md:px-6 xl:px-0" onBlur={()=>setOpen(false)}>
                     <div className="flex justify-end py-2">
