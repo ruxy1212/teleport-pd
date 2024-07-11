@@ -1,13 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import WebLayout from "../layouts/WebLayout";
 import ChevronRight from "../components/icons/ChevronRight";
-import Plus from "../components/icons/Plus"
-import Minus from "../components/icons/Minus"
 import Percent from "../components/icons/Percent"
-import Trailing from "../components/icons/Trailing";
 import useLocalStorage from "../hooks/useLocalStorage";
 import Popup from "../components/Popup"
+import CartItem from "../components/CartItem";
+import OrderSummary from "../components/OrderSummary";
 
 export default function Cart(){
     const InitialCart = [
@@ -15,11 +14,6 @@ export default function Cart(){
     ];
     const [message, setMessage] = useState(null);
     const [cartItems, setCartItems] = useLocalStorage("cartItems", InitialCart);
-    const validCoupons = {"DISCOUNT10": 10, "SALE20": 20, "PROMO30": 30, "EREGE": 50, "RUXY": 50};
-    const [coupon, setCoupon] = useState("");
-    const [couponFeedback, setCouponFeedback] = useState("");
-    const [couponDiscount, setCouponDiscount] = useState(0);
-    const navigate = useNavigate();  
 
     const changeQuantity = (product, step) => {
       setCartItems((prev) =>
@@ -39,19 +33,6 @@ export default function Cart(){
       cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
     const getDiscount = () => 
       cartItems.reduce((totalDiscount, item) => totalDiscount + (item.discount * item.quantity), 0);
-    const applyCoupon = () => {
-      if (validCoupons[coupon.toUpperCase()]) {
-        setCouponDiscount(validCoupons[coupon.toUpperCase()]);
-        setCouponFeedback("Coupon applied successfully!");
-      } else {
-        setCouponFeedback("Invalid or expired coupon code.");
-        setCouponDiscount(0);
-      }
-    };
-
-    const proceedToPayment = () => {
-      navigate("/checkout", { state: { price: getTotal(), discount: getDiscount(), coupon: couponDiscount  } });
-    };
 
     const showPopup = (message) => {
         setMessage(message);
@@ -77,73 +58,15 @@ export default function Cart(){
               </div>
               <div className="mt-1">
                 <div className={`${cartItems.length>1?'h-[500px]':''} overflow-y-auto`}>
-                  {/* multi and single */}
-                  {/* h-[600px] overflow-scroll */}
                   <div className="flex gap-0 md:gap-5 flex-col md:flex-col">
                   {cartItems.length < 1 ? (
                     <p className="text-pd-red pd-p-18 h-[300px] flex justify-center items-center">Your cart is empty</p>
                   ) : (
                     cartItems.length == 1 ? (
-                      <div className="flex flex-wrap">
-                        <div className="flex flex-col w-full lg:w-[57%]">
-                          <div className="flex flex-col max-w-[350px] justify-center items-center px-6 py-4 w-full rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
-                            <img loading="lazy" src={"images/products/n"+cartItems[0].id+".png"} className="w-full"/>
-                          </div>
-                        </div>
-                        <div className="pl-5 w-full lg:w-[43%]">
-                          <div className="flex flex-col">
-                            <div className="flex gap-2.5 mt-10 text-2xl font-extrabold text-pd-black">
-                              <h3 className="leading-8 pd-h3">{cartItems[0].title}</h3>
-                              <h3 className="my-auto pd-h3 text-right leading-[130%]">${cartItems[0].price}</h3>
-                            </div>
-                            <div className="flex gap-2 mt-2 whitespace-nowrap pd-p font-semibold">
-                              <span className="text-pd-mid-gray">Color</span>
-                              <span className="text-pd-black">Silver</span>
-                            </div>
-                            <div className="flex gap-8 mt-6 w-full whitespace-nowrap break-at-half-lg">
-                              <div className="flex gap-10 justify-center items-center px-4 py-3 border border-black border-solid rounded-[52px] text-pd-black">
-                                <button onClick={() => changeQuantity(cartItems[0], -1)} disabled={cartItems[0].quantity === 1}><Minus /></button>
-                                <span className="self-start">{cartItems[0].quantity}</span>
-                                <button onClick={() => changeQuantity(cartItems[0], 1)}><Plus /></button>
-                              </div>
-                              <div className="my-auto">
-                                <button className="text-pd-red pd-p font-semibold" onClick={()=>removeItem(cartItems[0].id)}>Remove</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div> 
+                        <CartItem type="single" item={cartItems[0]} changeQuantity={changeQuantity} removeItem={removeItem} />
                     ):(
                       cartItems.map(item => (
-                        <div key={item.id} className="flex-row-at-half-md flex flex-col sm:flex-row gap-11 items-center">{console.log(item.discount)}
-                          <div className="flex flex-col w-full with-at-half-md md:w-[150px]">
-                            <div className="flex flex-col w-full with-at-half-md md:w-[150px] justify-center items-center px-6 py-4 rounded-2xl shadow-lg backdrop-blur-sm aspect-square mt-10 md:mt-0">
-                              <img loading="lazy" src={"images/products/n"+item.id+".png"} className="w-full"/>
-                            </div>
-                          </div>
-                          <div className="w-full with-at-half-md lg:w-[43%]">
-                            <div className="flex flex-col">
-                              <div className="flex gap-2.5 mt-10 text-2xl font-extrabold text-pd-black">
-                                <h3 className="leading-8 pd-h3">{item.title}</h3>
-                                <h3 className="my-auto pd-h3 text-right leading-[130%]">${item.price}</h3>
-                              </div>
-                              <div className="flex gap-2 mt-2 whitespace-nowrap pd-p font-semibold">
-                                <span className="text-pd-mid-gray">Color</span>
-                                <span className="text-pd-black">Silver</span>
-                              </div>
-                              <div className="flex gap-8 mt-6 w-full whitespace-nowrap">
-                                <div className="flex gap-10 justify-center items-center px-4 py-3 border border-black border-solid rounded-[52px] text-pd-black">
-                                  <button onClick={() => changeQuantity(item, -1)} disabled={item.quantity === 1}><Minus /></button>
-                                  <span className="self-start">{item.quantity}</span>
-                                  <button onClick={() => changeQuantity(item, 1)}><Plus /></button>
-                                </div>
-                                <div className="my-auto">
-                                  <button onClick={()=>removeItem(item.id)} className="text-pd-red pd-p font-semibold">Remove</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <CartItem key={item.id} type="multiple" item={item} changeQuantity={changeQuantity} removeItem={removeItem} />
                       ))
                     )
                   )}
@@ -155,50 +78,7 @@ export default function Cart(){
                 </div>
               </div>
             </div>    
-            {/* new component */}
-            <div className="flex flex-col ml-5 w-[33%] max-md:ml-0 max-md:w-full">
-              <div className="flex flex-col self-stretch p-8 m-auto w-full pd-p font-montserrat leading-6 bg-white rounded-xl border border-black border-solid max-md:px-5 max-md:mt-10">
-              <h3 className="pd-h3 font-extrabold leading-8 text-pd-black">Order Summary</h3>
-              <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-pd-black">
-                <p>Price</p>
-                <p>${getTotal()}</p>
-              </div>
-              <div className="flex gap-5 justify-between mt-6 whitespace-nowrap text-pd-black">
-                <p>Discount</p>
-                <p>${getDiscount()}</p>
-              </div>
-              <div className="flex gap-5 justify-between mt-6 whitespace-nowrap">
-                <p className="text-pd-black">Shipping</p>
-                <p className="text-pd-red">Free</p>
-              </div>
-              <div className="flex gap-5 justify-between mt-6 text-pd-black">
-                <p>Coupon Applied</p>
-                <div className="flex flex-col items-end">
-                  <p>${(couponDiscount/100*(getTotal()-getDiscount()))}</p>
-                  {couponDiscount > 0 && <p className="text-xs font-montserrat text-pd-red">-{couponDiscount}%</p>}
-                </div>
-              </div>
-              <div className="shrink-0 mt-8 h-px bg-pd-mid-gray" />
-              <div className="flex gap-5 justify-between mt-8 whitespace-nowrap text-pd-black">
-                <p>TOTAL</p>
-                <p className="font-semibold text-right">${(getTotal()-getDiscount())-(couponDiscount/100*(getTotal()-getDiscount()))}</p>
-              </div>
-              <div className="flex gap-5 justify-between mt-6 text-pd-black">
-                <p>Estimated Delivery by</p>
-                <p className="font-semibold">25 July, 2024</p>
-              </div>
-              <div className="relative px-4 py-2 mt-6 text-gray-400 rounded-sm border border-black border-solid">
-                <input type="text" className="w-full pr-8 border-none outline-none" placeholder="Coupon Code" value={coupon} onChange={(e) => setCoupon(e.target.value)}/>
-                <div className="absolute w-6 top-2 right-2 aspect-square fill-white">
-                  <button onClick={applyCoupon}><Trailing /></button>
-                </div>
-              </div>
-              <p className={`${couponFeedback === "Coupon applied successfully!" ? "text-pd-green" : "text-pd-red"}`}>{couponFeedback}</p>
-              <div className="mt-6">
-                <button onClick={proceedToPayment} className="w-full py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat pd-button">Proceed to Checkout</button>
-              </div>
-            </div>
-          </div>
+            <OrderSummary total={getTotal()} discount={getDiscount()} proceed_loc="payment" proceed_msg="Proceed to Checkout" />
         </div>
         {message && <Popup message={message} duration={5000} onClose={() => setMessage(null)} />}
       </div>
