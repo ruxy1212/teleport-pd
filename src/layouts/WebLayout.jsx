@@ -60,7 +60,7 @@ export default function WebLayout({children, cartItems = null}){
                         </ul>
                         {
                             location.pathname == '/' && 
-                            <button className="mx-4 py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Go To Cart<ArrowRight className="h-5 w-5"/></button>
+                            <Link to="/cart"  className="mx-4 py-4 px-9 flex items-center justify-center gap-2 bg-pd-red text-pd-white rounded-[3.25rem] font-medium pd-button font-montserrat">Go To Cart<ArrowRight className="h-5 w-5"/></Link>
                         }
                     </div>
                 </nav>
